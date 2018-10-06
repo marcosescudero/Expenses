@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Expenses.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,7 @@ namespace Expenses
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new ExpensesPage());
         }
 
         protected override void OnStart()
