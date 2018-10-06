@@ -157,4 +157,7 @@
       <Name>Expenses</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implementations\" />
+  </ItemGroup>
 </Project>
