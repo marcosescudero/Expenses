@@ -4,13 +4,13 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ExpenseDetails
+    public class ExpenseDetail
     {
         [Key]
+        public int ExpenseDetailId { get; set; }
+        
+        [Display(Name = "Expense")]
         public int ExpenseId { get; set; }
-
-        [Display(Name = "Line")]
-        public int LineNumber { get; set; }
 
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
@@ -31,21 +31,19 @@
         [Display(Name = "Document Number")]
         public string DocumentNumber { get; set; }
 
+        [Display(Name = "Neto")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Amount { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        public decimal AmountIIBB { get; set; }
-
+        [Display(Name = "IVA")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal AmountIVA { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        public decimal AmountGanancias { get; set; }
-
+        [Display(Name = "Percepciones")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal AmountPercepcion { get; set; }
 
+        [Display(Name = "Total")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal TotalAmount { get; set; }
 
@@ -55,7 +53,8 @@
         [Display(Name = "Image")]
         public string ImagePath { get; set; }
 
-        [NotMapped] // Cuando tengo atributos que forman parte del modelo, PERO que no formen parte de la base de datos, se coloca [NotMapped]
+        // Cuando tengo atributos que forman parte del modelo, PERO que no formen parte de la base de datos, se coloca [NotMapped]
+        [NotMapped] 
         public byte[] ImageArray { get; set; }
 
         public string ImageFullPath
@@ -70,6 +69,13 @@
                 return $"http://200.55.241.235/ExpensesAPI{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
             }
         }
+
+        public virtual Expense Expense { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        public virtual ExpenseType ExpenseType { get; set; }
+        public virtual DocumentType DocumentType { get; set; }
+        public virtual PaymentType PaymentType { get; set; }
+        public virtual Currency Currency { get; set; }
 
         public override string ToString()
         {

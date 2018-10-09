@@ -195,11 +195,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CurrenciesController.cs" />
+    <Compile Include="Controllers\DocumentTypesController.cs" />
+    <Compile Include="Controllers\ExpenseDetailsController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
+    <Compile Include="Controllers\ExpenseTypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentTypesController.cs" />
+    <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LocalDataContext.cs" />
@@ -221,6 +229,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -266,15 +278,46 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Currencies\Create.cshtml" />
+    <Content Include="Views\Currencies\Delete.cshtml" />
+    <Content Include="Views\Currencies\Details.cshtml" />
+    <Content Include="Views\Currencies\Edit.cshtml" />
+    <Content Include="Views\Currencies\Index.cshtml" />
+    <Content Include="Views\DocumentTypes\Create.cshtml" />
+    <Content Include="Views\DocumentTypes\Delete.cshtml" />
+    <Content Include="Views\DocumentTypes\Details.cshtml" />
+    <Content Include="Views\DocumentTypes\Edit.cshtml" />
+    <Content Include="Views\DocumentTypes\Index.cshtml" />
+    <Content Include="Views\Vendors\Create.cshtml" />
+    <Content Include="Views\Vendors\Delete.cshtml" />
+    <Content Include="Views\Vendors\Details.cshtml" />
+    <Content Include="Views\Vendors\Edit.cshtml" />
+    <Content Include="Views\Vendors\Index.cshtml" />
+    <Content Include="Views\PaymentTypes\Create.cshtml" />
+    <Content Include="Views\PaymentTypes\Delete.cshtml" />
+    <Content Include="Views\PaymentTypes\Details.cshtml" />
+    <Content Include="Views\PaymentTypes\Edit.cshtml" />
+    <Content Include="Views\PaymentTypes\Index.cshtml" />
+    <Content Include="Views\ExpenseTypes\Create.cshtml" />
+    <Content Include="Views\ExpenseTypes\Delete.cshtml" />
+    <Content Include="Views\ExpenseTypes\Details.cshtml" />
+    <Content Include="Views\ExpenseTypes\Edit.cshtml" />
+    <Content Include="Views\ExpenseTypes\Index.cshtml" />
+    <Content Include="Views\ExpenseDetails\Create.cshtml" />
+    <Content Include="Views\ExpenseDetails\Delete.cshtml" />
+    <Content Include="Views\ExpenseDetails\Details.cshtml" />
+    <Content Include="Views\ExpenseDetails\Edit.cshtml" />
+    <Content Include="Views\ExpenseDetails\Index.cshtml" />
+    <Content Include="Views\Expenses\Create.cshtml" />
+    <Content Include="Views\Expenses\Delete.cshtml" />
+    <Content Include="Views\Expenses\Details.cshtml" />
+    <Content Include="Views\Expenses\Edit.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />

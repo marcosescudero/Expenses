@@ -3,5 +3,6 @@
     using Domain.Models;
     public class LocalDataContext : DataContext
     {
+
     }
 }

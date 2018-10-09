@@ -1,7 +1,9 @@
 ﻿
 namespace Expenses.Common.Models
 {
+    using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +15,8 @@ namespace Expenses.Common.Models
         public string Alias { get; set; }
         [StringLength(13)]
         public string Cuit { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
         public override string ToString()
         {
             return this.Alias;

@@ -1,7 +1,9 @@
 ﻿
 namespace Expenses.Common.Models
 {
+    using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     public class Expense
@@ -29,6 +31,9 @@ namespace Expenses.Common.Models
 
         [Display(Name = "Approved")]
         public bool Approved { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
 
         public override string ToString()
         {
