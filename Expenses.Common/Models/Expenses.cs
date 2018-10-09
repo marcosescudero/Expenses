@@ -10,7 +10,7 @@ namespace Expenses.Common.Models
         public int ExpenseId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Description { get; set; }
 
         [Display(Name = "Start")]

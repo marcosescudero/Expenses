@@ -46,8 +46,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Models\Currencies.cs" />
+    <Compile Include="Models\DocumentsType.cs" />
     <Compile Include="Models\Expenses.cs" />
     <Compile Include="Models\ExpensesDetails.cs" />
+    <Compile Include="Models\ExpensesType.cs" />
+    <Compile Include="Models\PaymentsType.cs" />
+    <Compile Include="Models\Vendors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
