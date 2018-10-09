@@ -51,6 +51,8 @@
     <Compile Include="Models\ExpenseDetail.cs" />
     <Compile Include="Models\ExpenseType.cs" />
     <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\UserRequest.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
