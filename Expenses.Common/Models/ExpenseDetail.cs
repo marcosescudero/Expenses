@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class ExpensesDetails
+    public class ExpenseDetails
     {
         [Key]
         public int ExpenseId { get; set; }

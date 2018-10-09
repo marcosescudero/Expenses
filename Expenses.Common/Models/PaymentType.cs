@@ -3,10 +3,11 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    public class ExpensesType
+    public class PaymentType
     {
         [Key]
-        public int ExpenseTypeId { get; set; }
+        public int PaymentTypeId { get; set; }
         public string Description { get; set; }
+
     }
 }

@@ -45,14 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Models\Currencies.cs" />
-    <Compile Include="Models\DocumentsType.cs" />
-    <Compile Include="Models\Expenses.cs" />
-    <Compile Include="Models\ExpensesDetails.cs" />
-    <Compile Include="Models\ExpensesType.cs" />
-    <Compile Include="Models\PaymentsType.cs" />
-    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\DocumentType.cs" />
+    <Compile Include="Models\Expense.cs" />
+    <Compile Include="Models\ExpenseDetail.cs" />
+    <Compile Include="Models\ExpenseType.cs" />
+    <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

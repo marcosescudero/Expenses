@@ -5,7 +5,7 @@ namespace Expenses.Common.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class Vendors
+    public class Vendor
     {
         [Key]
         public int VendorId { get; set; }

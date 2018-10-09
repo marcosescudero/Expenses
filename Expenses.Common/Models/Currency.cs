@@ -3,12 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    public class DocumentsType
+    public class Currency
     {
         [Key]
-        public int DocumentTypeId { get; set; }
+        public int CurrencyId { get; set; }
         public string Description { get; set; }
         [StringLength(3)]
-        public string DocumentCode { get; set; }
+        public string Symbol { get; set; }
     }
 }
