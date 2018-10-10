@@ -1,4 +1,5 @@
-﻿using Expenses.Views;
+﻿using Expenses.ViewModels;
+using Expenses.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,9 @@ namespace Expenses
         {
             InitializeComponent();
 
+            var mainViewModel = MainViewModel.GetInstance();
+
+            mainViewModel.Expenses = new ExpensesViewModel();
             MainPage = new NavigationPage(new ExpensesPage());
         }
 

@@ -385,20 +385,20 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No expenses information available..
+        /// </summary>
+        public static string NoExpensesMessage {
+            get {
+                return ResourceManager.GetString("NoExpensesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No internet Connection..
         /// </summary>
         public static string NoInternet {
             get {
                 return ResourceManager.GetString("NoInternet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No products information available..
-        /// </summary>
-        public static string NoProductsMessage {
-            get {
-                return ResourceManager.GetString("NoProductsMessage", resourceCulture);
             }
         }
         

@@ -7,6 +7,7 @@
 
         #region Properties
         public ExpensesViewModel Expenses { get; set; }
+        public EditExpenseViewModel EditExpense { get; set; }
         #endregion
 
         #region Constructors

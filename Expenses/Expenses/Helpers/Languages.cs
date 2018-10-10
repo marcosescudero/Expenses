@@ -208,9 +208,9 @@ namespace Expenses.Helpers
         {
             get { return Resource.Exit; }
         }
-        public static string NoProductsMessage
+        public static string NoExpensesMessage
         {
-            get { return Resource.NoProductsMessage; }
+            get { return Resource.NoExpensesMessage; }
         }
 
         public static string FirstName

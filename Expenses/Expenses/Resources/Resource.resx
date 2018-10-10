@@ -246,8 +246,8 @@
   <data name="Exit" xml:space="preserve">
     <value>Close session</value>
   </data>
-  <data name="NoProductsMessage" xml:space="preserve">
-    <value>No products information available.</value>
+  <data name="NoExpensesMessage" xml:space="preserve">
+    <value>No expenses information available.</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>

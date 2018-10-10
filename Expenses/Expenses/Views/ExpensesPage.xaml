@@ -12,12 +12,6 @@
         <StackLayout
             BindingContext="{Binding Expenses}"
             Padding="5">
-            <SearchBar
-                HeightRequest="30"
-                Placeholder="{i18n:Translate Search}"
-                SearchCommand="{Binding SearchCommand}"
-                Text="{Binding Filter}">
-            </SearchBar>
             <ListView
                 HasUnevenRows="True"
                 IsRefreshing="{Binding IsRefreshing}"
@@ -42,10 +36,10 @@
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Grid.Column="0"
-                                    FontAttributes="Bold" 
-                                    Text="{Binding ExpenseDateStart}">
+                                    Text="{Binding ExpenseDateStart, StringFormat='\{0:d/M/yy}'}">
                                 </Label>
                                 <Label
+                                    FontAttributes="Bold"
                                     Grid.Column="1"
                                     Text="{Binding Description}">
                                 </Label>
