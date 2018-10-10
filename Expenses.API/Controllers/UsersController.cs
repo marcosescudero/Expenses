@@ -36,7 +36,7 @@ namespace Expenses.API.Controllers
             
             return BadRequest(answer.Message);
             */
-            return BadRequest("not implementeds");
+            return BadRequest("not implemented");
 
         }
 
