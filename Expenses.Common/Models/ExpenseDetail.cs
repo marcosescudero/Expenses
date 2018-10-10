@@ -65,7 +65,6 @@
                 {
                     return "noproduct";
                 }
-                //return $"http://200.55.241.235/ExpensesBackend{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
                 return $"http://200.55.241.235/ExpensesAPI{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
             }
         }

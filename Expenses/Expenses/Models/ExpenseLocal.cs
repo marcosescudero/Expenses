@@ -1,6 +1,5 @@
 ﻿namespace Expenses.Models
 {
-    using Common.Models;
     using SQLite;
     using System;
 

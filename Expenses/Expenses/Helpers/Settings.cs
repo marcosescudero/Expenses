@@ -20,6 +20,8 @@
         #region Setting Constants
         private const string tokenType = "TokenType";
         private const string accessToken = "AccessToken";
+        private const string tokenExpires = "TokenExpires";
+        private const string userName = "UserName";
         private const string userASP = "UserASP";
         private const string isRemembered = "IsRemembered";
         private static readonly string stringDefault = string.Empty;
@@ -63,6 +65,31 @@
                 AppSettings.AddOrUpdateValue(accessToken, value);
             }
         }
+
+        public static string TokenExpires
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(tokenExpires, stringDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(tokenExpires, value);
+            }
+        }
+
+        public static string UserName
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault(userName, stringDefault);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue(userName, value);
+            }
+        }
+
         public static bool IsRemembered
         {
             get
