@@ -2,6 +2,7 @@
 {
     using Common.Models;
     using Expenses.Helpers;
+    using Expenses.Models;
     using Services;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -24,6 +25,8 @@
 
         #region Properties
         public List<Expense> MyExpenses { get; set; }
+        public List<ExpenseLocal> MyExpensesLocal { get; set; }
+
         public ObservableCollection<ExpenseItemViewModel> Expenses
         {
             get { return this.expenses; }
@@ -93,13 +96,25 @@
 
         private async Task LoadExpensesFromDB()
         {
-            this.MyExpenses = await this.dataService.GetAllExpenses();
+
+            this.MyExpensesLocal = await this.dataService.GetAllExpenses();
+
+            this.MyExpenses = this.MyExpensesLocal.Select(p => new Expense
+            {
+                Approved = p.Approved,
+                Comments = p.Comments,
+                Description = p.Description,
+                ExpenseDateEnd = p.ExpenseDateEnd,
+                ExpenseDateStart = p.ExpenseDateStart,
+                ExpenseId = p.ExpenseId,
+                UserId = p.UserId,
+            }).ToList();
         }
 
         private async Task SaveExpensesToDB()
         {
             await this.dataService.DeleteAllExpenses();
-            this.dataService.Insert(this.MyExpenses);
+            this.dataService.Insert(this.MyExpensesLocal);
         }
 
         private async Task<bool> LoadExpensesFromAPI()
@@ -117,6 +132,16 @@
                 return false;
             }
             this.MyExpenses = (List<Expense>)response.Result; // hay que castearlo
+            this.MyExpensesLocal = this.MyExpenses.Select(p => new ExpenseLocal
+            {
+                Approved = p.Approved,
+                Comments = p.Comments,
+                Description = p.Description,
+                ExpenseDateEnd = p.ExpenseDateEnd,
+                ExpenseDateStart = p.ExpenseDateStart,
+                ExpenseId = p.ExpenseId,
+                UserId = p.UserId,
+            }).ToList();
             return true;
         }
 

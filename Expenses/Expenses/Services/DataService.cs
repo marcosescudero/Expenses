@@ -59,13 +59,13 @@
             await this.connection.DeleteAsync(model);
         }
 
-        public async Task<List<Expense>> GetAllExpenses()
+        public async Task<List<ExpenseLocal>> GetAllExpenses()
         {
             try
             {
                 var query = await this.connection.QueryAsync<ExpenseLocal>("select * from [Expense]");
                 var array = query.ToArray();
-                var list = array.Select(p => new Expense
+                var list = array.Select(p => new ExpenseLocal
                 {
                     Approved = p.Approved,
                     Comments = p.Comments,
@@ -126,7 +126,7 @@
 
         public async Task DeleteAllExpenses()
         {
-            var query = await this.connection.QueryAsync<Expense>("delete from [Expense]");
+            var query = await this.connection.QueryAsync<ExpenseLocal>("delete from [Expense]");
         }
         /*
         public async Task DeleteAllMeasureUnits()
