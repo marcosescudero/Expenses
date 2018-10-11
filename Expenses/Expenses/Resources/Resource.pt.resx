@@ -302,7 +302,22 @@
   <data name="Expenses" xml:space="preserve">
     <value>Despesas</value>
   </data>
+  <data name="NoCurrenciesMessage" xml:space="preserve">
+    <value>Nenhuma informação sobre moedas disponíveis.!</value>
+  </data>
   <data name="NoExpensesMessage" xml:space="preserve">
-    <value>Nenhuma informação disponível!</value>
+    <value>Nenhuma informação sobre despesas disponíveis.</value>
+  </data>
+  <data name="NoExpenseTypeMessage" xml:space="preserve">
+    <value>Nenhuma informação sobre tipos de despesas disponíveis!</value>
+  </data>
+  <data name="NoPaymentTypeMessage" xml:space="preserve">
+    <value>Nenhuma informação sobre os tipos de pagamento disponíveis!</value>
+  </data>
+  <data name="NoVendorMessage" xml:space="preserve">
+    <value>Nenhuma informação sobre fornecedores disponíveis!</value>
+  </data>
+  <data name="NoDocumentTypeMessage" xml:space="preserve">
+    <value>Nenhuma informação sobre tipos de documentos disponíveis!</value>
   </data>
 </root>

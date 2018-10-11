@@ -385,11 +385,38 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No expenses information available..
+        ///   Looks up a localized string similar to No information on currencies available..
+        /// </summary>
+        public static string NoCurrenciesMessage {
+            get {
+                return ResourceManager.GetString("NoCurrenciesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information on document types available.
+        /// </summary>
+        public static string NoDocumentTypeMessage {
+            get {
+                return ResourceManager.GetString("NoDocumentTypeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information on expenses available..
         /// </summary>
         public static string NoExpensesMessage {
             get {
                 return ResourceManager.GetString("NoExpensesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information on expense types available.
+        /// </summary>
+        public static string NoExpenseTypeMessage {
+            get {
+                return ResourceManager.GetString("NoExpenseTypeMessage", resourceCulture);
             }
         }
         
@@ -399,6 +426,24 @@ namespace Expenses.Resources {
         public static string NoInternet {
             get {
                 return ResourceManager.GetString("NoInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information on payment types available.
+        /// </summary>
+        public static string NoPaymentTypeMessage {
+            get {
+                return ResourceManager.GetString("NoPaymentTypeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No information on vendors available.
+        /// </summary>
+        public static string NoVendorMessage {
+            get {
+                return ResourceManager.GetString("NoVendorMessage", resourceCulture);
             }
         }
         

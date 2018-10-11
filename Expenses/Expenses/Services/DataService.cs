@@ -30,8 +30,12 @@
             var databasePath = DependencyService.Get<IPathService>().GetDatabasePath();
             this.connection = new SQLiteAsyncConnection(databasePath);
             await connection.CreateTableAsync<ExpenseLocal>().ConfigureAwait(false);
-            //await connection.CreateTableAsync<MeasureUnitLocal>().ConfigureAwait(false);
-            //await connection.CreateTableAsync<LocationLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<CurrencyLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<DocumentTypeLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<ExpenseDetailLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<ExpenseTypeLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<PaymentTypeLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<VendorLocal>().ConfigureAwait(false);
         }
 
         public async Task Insert<T>(T model)
@@ -83,17 +87,18 @@
                 return null;
             }
         }
-        /*
-        public async Task<List<MeasureUnitLocal>> GetAllMeasureUnits()
+
+        public async Task<List<CurrencyLocal>> GetAllCurrencies()
         {
             try
             {
-                var query = await this.connection.QueryAsync<MeasureUnitLocal>("select * from [MeasureUnit]");
+                var query = await this.connection.QueryAsync<CurrencyLocal>("select * from [MeasureUnit]");
                 var array = query.ToArray();
-                var list = array.Select(p => new MeasureUnitLocal
+                var list = array.Select(p => new CurrencyLocal
                 {
-                    MeasureUnitId = p.MeasureUnitId,
+                    CurrencyId = p.CurrencyId,
                     Description = p.Description,
+                    Symbol = p.Symbol,
                 }).ToList();
                 return list;
             }
@@ -103,41 +108,16 @@
                 return null;
             }
         }
-        public async Task<List<LocationLocal>> GetAllLocations()
-        {
-            try
-            {
-                var query = await this.connection.QueryAsync<LocationLocal>("select * from [Location]");
-                var array = query.ToArray();
-                var list = array.Select(p => new LocationLocal
-                {
-                    LocationId = p.LocationId,
-                    Description = p.Description,
-                }).ToList();
-                return list;
-            }
-            catch (Exception e)
-            {
-                var errormessage = e.Message.ToString();
-                return null;
-            }
-        }
-        */
 
         public async Task DeleteAllExpenses()
         {
             var query = await this.connection.QueryAsync<ExpenseLocal>("delete from [Expense]");
         }
-        /*
-        public async Task DeleteAllMeasureUnits()
+
+        public async Task DeleteAllCurrencies()
         {
-            var query = await this.connection.QueryAsync<MeasureUnit>("delete from [MeasureUnit]");
+            var query = await this.connection.QueryAsync<CurrencyLocal>("delete from [Currency]");
         }
-        public async Task DeleteAllLocations()
-        {
-            var query = await this.connection.QueryAsync<Location>("delete from [Location]");
-        }
-        */
         #endregion
     }
 }

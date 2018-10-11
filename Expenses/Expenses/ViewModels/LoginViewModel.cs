@@ -113,16 +113,16 @@
             Settings.AccessToken = token.AccessToken;
             Settings.TokenExpires = token.Expires.ToString();
             Settings.UserName = token.UserName;
-
             Settings.IsRemembered = this.IsRemembered;
 
             //Application.Current.MainPage = new NavigationPage(new ItemsPage());
 
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.MeasureUnits = new MeasureUnitsViewModel();
-            mainViewModel.Locations = new LocationsViewModel();
-            mainViewModel.Items = new ItemsViewModel();
-            Application.Current.MainPage = new MasterPage();
+            mainViewModel.Currencies = new CurrenciesViewModel();
+            mainViewModel.Expenses = new ExpensesViewModel();
+            Application.Current.MainPage = new ExpensesPage();
+
+            //Application.Current.MainPage = new MasterPage();
 
             //this.IsRunning = false;
             //this.IsEnabled = true;

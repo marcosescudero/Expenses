@@ -6,8 +6,14 @@
         #endregion
 
         #region Properties
+
+        #endregion
+
+        #region ViewModels
+        public LoginViewModel Login { get; set; }
         public ExpensesViewModel Expenses { get; set; }
         public EditExpenseViewModel EditExpense { get; set; }
+        public CurrenciesViewModel Currencies { get; set; }
         #endregion
 
         #region Constructors

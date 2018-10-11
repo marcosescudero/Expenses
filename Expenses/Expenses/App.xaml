@@ -12,9 +12,32 @@
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">http://200.55.241.235/ExpensesAPI</x:String>
             <x:String x:Key="UrlPrefix">/api</x:String>
+            <x:String x:Key="UrlCurrenciesController">/Currencies</x:String>
             <x:String x:Key="UrlExpensesController">/Expenses</x:String>
             <x:String x:Key="UrlExpenseDetailController">/ExpensesDetails</x:String>
             <x:String x:Key="UrlUsersController">/Users</x:String>
+            
+            <!-- General colors -->
+            <Color x:Key="MainColor">#ff3b77</Color>
+            <Color x:Key="FontColor">#52656b</Color>
+            <Color x:Key="AccentColor1">#cdff00</Color>
+            <Color x:Key="AccentColor2">#b8b89f</Color>
+            <Color x:Key="BackgroundColor">#ffffff</Color>
+
+            <!-- Alternative colors -->
+            <Color x:Key="Primary">#607D8B</Color>
+            <Color x:Key="Primary_Dark">#455A64</Color>
+            <Color x:Key="Primary_Light">#CFD8DC</Color>
+            <Color x:Key="Accent">#00BCD4</Color>
+            <Color x:Key="Primary_text">#212121</Color>
+            <Color x:Key="Secondary_text">#757575</Color>
+            <Color x:Key="Icons">#FFFFFF</Color>
+            <Color x:Key="Divider">#BDBDBD</Color>
+
+            <!-- Menu colors -->
+            <Color x:Key="MenuColor">#52656b</Color>
+            <Color x:Key="MenuFontColor">#ffffff</Color>
+
         </ResourceDictionary>
 
     </Application.Resources>

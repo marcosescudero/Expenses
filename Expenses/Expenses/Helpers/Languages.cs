@@ -302,5 +302,32 @@ namespace Expenses.Helpers
         {
             get { return Resource.RegisterConfirmation; }
         }
+
+        public static string NoExpenseTypeMessage
+        {
+            get { return Resource.NoExpenseTypeMessage; }
+        }
+
+        public static string NoDocumentTypeMessage
+        {
+            get { return Resource.NoDocumentTypeMessage; }
+        }
+
+        public static string NoCurrenciesMessage
+        {
+            get { return Resource.NoCurrenciesMessage; }
+        }
+
+        public static string NoVendorMessage
+        {
+            get { return Resource.NoVendorMessage; }
+        }
+
+        public static string NoPaymentTypeMessage
+        {
+            get { return Resource.NoPaymentTypeMessage; }
+        }
+
+
     }
 }

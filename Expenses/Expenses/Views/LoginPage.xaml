@@ -13,7 +13,7 @@
                 Padding="5">
                 <Image  
                     HeightRequest="150"
-                    Source="login">
+                    Source="login2">
                 </Image>
                 <Grid
                     Margin="10,0"
