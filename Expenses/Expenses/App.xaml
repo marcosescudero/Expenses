@@ -14,7 +14,7 @@
             <x:String x:Key="UrlPrefix">/api</x:String>
             <x:String x:Key="UrlCurrenciesController">/Currencies</x:String>
             <x:String x:Key="UrlRequestsController">/Requests</x:String>
-            <x:String x:Key="UrlExpensesController">/Expensess</x:String>
+            <x:String x:Key="UrlExpensesController">/Expenses</x:String>
             <x:String x:Key="UrlUsersController">/Users</x:String>
             
             <!-- General colors -->

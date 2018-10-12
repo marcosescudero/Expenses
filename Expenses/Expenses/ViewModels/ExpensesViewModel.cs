@@ -1,22 +1,28 @@
-﻿using Expenses.Common.Models;
-using Expenses.Helpers;
-using Expenses.Models;
-using Expenses.Services;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-
+﻿
 namespace Expenses.ViewModels
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using Common.Models;
+    using GalaSoft.MvvmLight.Command;
+    using Helpers;
+    using Models;
+    using Services;
+    using Xamarin.Forms;
+
     public class ExpensesViewModel : BaseViewModel
     {
 
         #region Attributes
         private bool isRefreshing;
+        private string filter;
         private bool isEnabled;
+        private Request request;
         private ObservableCollection<ExpenseItemViewModel> expenses;
+        private decimal totalExpenses;
         #endregion
 
         #region Services
@@ -27,6 +33,13 @@ namespace Expenses.ViewModels
         #region Properties
         public List<Expense> MyExpenses { get; set; }
         public List<ExpenseLocal> MyExpensesLocal { get; set; }
+        
+
+        public Request Request
+        {
+            get { return this.request; }
+            set { SetValue(ref this.request, value); }
+        }
 
         public ObservableCollection<ExpenseItemViewModel> Expenses
         {
@@ -39,6 +52,23 @@ namespace Expenses.ViewModels
             get { return this.isRefreshing; }
             set { SetValue(ref this.isRefreshing, value); }
         }
+
+        public string Filter
+        {
+            get { return this.filter; }
+            set
+            {
+                SetValue(ref filter, value);
+                this.RefreshList();
+            }
+        }
+
+        public decimal TotalExpenses
+        {
+            get { return this.totalExpenses; }
+            set { SetValue(ref this.totalExpenses, value); }
+        }
+
         #endregion
 
         #region Singleton
@@ -59,6 +89,15 @@ namespace Expenses.ViewModels
             instance = this;
             this.apiService = new ApiService();
             this.dataService = new DataService();
+            LoadExpenses();
+            this.IsRefreshing = false;
+        }
+        public ExpensesViewModel(Request request)
+        {
+            instance = this;
+            this.apiService = new ApiService();
+            this.dataService = new DataService();
+            this.Request = request;
             LoadExpenses();
             this.IsRefreshing = false;
         }
@@ -114,7 +153,12 @@ namespace Expenses.ViewModels
                 PaymentTypeId = p.PaymentTypeId,
                 TotalAmount = p.TotalAmount,
                 VendorId = p.VendorId,
-            }).ToList();
+            }).Where(p => p.RequestId == (this.Request!=null?this.Request.RequestId:p.RequestId)).ToList();
+
+            this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
+
+            //if (this.Request != null)
+            //    this.MyExpenses = this.MyExpenses.Where(p => p.RequestId == this.Request.RequestId).ToList();
         }
 
         private async Task SaveExpensesToDB()
@@ -137,6 +181,9 @@ namespace Expenses.ViewModels
                 return false;
             }
             this.MyExpenses = (List<Expense>)response.Result; // hay que castearlo
+            //if (this.Request != null)
+            //    this.MyExpenses = this.MyExpenses.Where(p => p.RequestId == this.Request.RequestId).ToList();
+
             this.MyExpensesLocal = this.MyExpenses.Select(p => new ExpenseLocal
             {
                 Amount = p.Amount,
@@ -156,32 +203,89 @@ namespace Expenses.ViewModels
                 TotalAmount = p.TotalAmount,
                 VendorId = p.VendorId,
             }).ToList();
+
+            if (this.Request != null)
+                this.MyExpenses = this.MyExpenses.Where(p => p.RequestId == this.Request.RequestId).ToList();
+
+            this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
             return true;
         }
 
         public void RefreshList()
         {
-            // Expresion Lamda (ALTA PERFORMANCE)
-            var myListExpenseItemViewModel = this.MyExpenses.Select(p => new ExpenseItemViewModel
+
+            if (string.IsNullOrEmpty(this.Filter))
             {
-                VendorId = p.VendorId,
-                TotalAmount = p.TotalAmount,
-                PaymentTypeId = p.PaymentTypeId,
-                ImagePath = p.ImagePath,
-                ImageArray = p.ImageArray,
-                ExpenseTypeId = p.ExpenseTypeId,
-                ExpenseId = p.ExpenseId,
-                ExpenseDate = p.ExpenseDate,
-                DocumentTypeId = p.DocumentTypeId,
-                Amount = p.Amount,
-                AmountIVA = p.AmountIVA,
-                AmountPercepcion = p.AmountPercepcion,
-                Comments = p.Comments,
-                CurrencyId = p.CurrencyId,
-                RequestId = p.RequestId,
-            });
-            this.Expenses = new ObservableCollection<ExpenseItemViewModel>(
-                myListExpenseItemViewModel.OrderBy(p => p.ExpenseDate));
+                // Expresion Lamda (ALTA PERFORMANCE)
+                var myListExpenseItemViewModel = this.MyExpenses.Select(p => new ExpenseItemViewModel
+                {
+                    VendorId = p.VendorId,
+                    TotalAmount = p.TotalAmount,
+                    PaymentTypeId = p.PaymentTypeId,
+                    ImagePath = p.ImagePath,
+                    ImageArray = p.ImageArray,
+                    ExpenseTypeId = p.ExpenseTypeId,
+                    ExpenseId = p.ExpenseId,
+                    ExpenseDate = p.ExpenseDate,
+                    DocumentTypeId = p.DocumentTypeId,
+                    Amount = p.Amount,
+                    AmountIVA = p.AmountIVA,
+                    AmountPercepcion = p.AmountPercepcion,
+                    Comments = p.Comments,
+                    CurrencyId = p.CurrencyId,
+                    RequestId = p.RequestId,
+                    Currency = p.Currency,
+                    Request = p.Request,
+                    DocumentNumber = p.DocumentNumber,
+                    DocumentType = p.DocumentType,
+                    ExpenseType = p.ExpenseType,
+                    PaymentType = p.PaymentType,
+                    Vendor = p.Vendor,
+                });
+                this.Expenses = new ObservableCollection<ExpenseItemViewModel>(
+                     myListExpenseItemViewModel.OrderBy(p => p.ExpenseDate));
+
+            }
+            else
+            {
+                var myListExpenseItemViewModel = this.MyExpenses.Select(p => new ExpenseItemViewModel
+                {
+                    VendorId = p.VendorId,
+                    TotalAmount = p.TotalAmount,
+                    PaymentTypeId = p.PaymentTypeId,
+                    ImagePath = p.ImagePath,
+                    ImageArray = p.ImageArray,
+                    ExpenseTypeId = p.ExpenseTypeId,
+                    ExpenseId = p.ExpenseId,
+                    ExpenseDate = p.ExpenseDate,
+                    DocumentTypeId = p.DocumentTypeId,
+                    Amount = p.Amount,
+                    AmountIVA = p.AmountIVA,
+                    AmountPercepcion = p.AmountPercepcion,
+                    Comments = p.Comments,
+                    CurrencyId = p.CurrencyId,
+                    RequestId = p.RequestId,
+                    Currency = p.Currency,
+                    Request = p.Request,
+                    DocumentNumber = p.DocumentNumber,
+                    DocumentType = p.DocumentType,
+                    ExpenseType = p.ExpenseType,
+                    PaymentType = p.PaymentType,
+                    Vendor = p.Vendor,
+                }).Where(p => p.ExpenseType.Description.ToLower().Contains(this.Filter.ToLower())).ToList();
+                this.Expenses = new ObservableCollection<ExpenseItemViewModel>(
+                    myListExpenseItemViewModel.OrderBy(p => p.ExpenseDate));
+            }
+
+            this.IsRefreshing = false;
+        }
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadExpenses);
+            }
         }
         #endregion
     }

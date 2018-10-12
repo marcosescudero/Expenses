@@ -19,11 +19,13 @@
                 HasUnevenRows="True"
                 IsRefreshing="{Binding IsRefreshing}"
                 IsPullToRefreshEnabled="True"
-                ItemsSource="{Binding Items}"
+                ItemsSource="{Binding Expenses}"
                 RefreshCommand="{Binding RefreshCommand}">
+                <!-- 
                 <ListView.Footer>
                     <Label Text="Grvppe Latam" />
                 </ListView.Footer>
+                -->
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -39,13 +41,14 @@
                                 <Label
                                     Grid.Column="0"
                                     FontAttributes="Bold" 
-                                    Text="{Binding ItemId}"
+                                    Text="{Binding ExpenseType.Description}"
                                     TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Label
+                                    HorizontalOptions="End"
                                     Grid.Column="1"
                                     FontAttributes="Bold" 
-                                    Text="{Binding Description}"
+                                    Text="{Binding TotalAmount,StringFormat='\{0:C2}'}"
                                     TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Image
@@ -58,6 +61,31 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Frame BackgroundColor="{StaticResource Primary_Light}"
+                OutlineColor="{StaticResource Divider}"
+                Padding="5"
+                HeightRequest="40"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Padding="5"
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand">
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        FontSize="Medium"
+                        FontAttributes="Bold" 
+                        Text="Total "
+                        TextColor="{StaticResource FontColor}">
+                    </Label>
+                    <Label
+                        FontSize="Medium"
+                        HorizontalOptions="End"
+                        FontAttributes="Bold" 
+                        Text="{Binding TotalExpenses,StringFormat='\{0:C2}'}"
+                        TextColor="{StaticResource FontColor}">
+                    </Label>
+                </StackLayout>
+            </Frame>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

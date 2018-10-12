@@ -15,6 +15,14 @@
                     HeightRequest="150"
                     Source="login4">
                 </Image>
+                <Label
+                    FontSize="Micro"
+                    FontAttributes="Bold"
+                    Text="User: demo , Pass: demo"
+                    TextColor="Navy"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                </Label>
                 <Grid
                     Margin="10,0"
                     VerticalOptions="CenterAndExpand">

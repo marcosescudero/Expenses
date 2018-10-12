@@ -98,6 +98,19 @@
                     );
                 return;
             }
+
+
+            if (this.Email.ToLower() == "demo")
+            {
+                this.Email = "marcos@gmail.com";
+            }
+
+            if (this.Password.ToLower() == "demo")
+            {
+                this.Password = "123456";
+            }
+
+
             if (!RegexHelper.IsValidEmailAddress(this.Email))
             {
                 await Application.Current.MainPage.DisplayAlert(

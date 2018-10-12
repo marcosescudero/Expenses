@@ -37,6 +37,7 @@
             //MainViewModel.GetInstance().EditExpense = new EditExpenseViewModel(this);
             //await App.Navigator.PushAsync(new EditExpensePage());
 
+            MainViewModel.GetInstance().Expenses = new ExpensesViewModel(this);
             await App.Navigator.PushAsync(new ExpensesPage());
         }
 
