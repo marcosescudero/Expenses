@@ -58,13 +58,13 @@
             instance = this;
             this.apiService = new ApiService();
             this.dataService = new DataService();
-            LoadExpenses();
+            LoadRequests();
             this.IsRefreshing = false;
         }
         #endregion
 
         #region Methods
-        private async void LoadExpenses()
+        private async void LoadRequests()
         {
             this.IsRefreshing = true;
 
@@ -156,7 +156,7 @@
             //}
 
             // Expresion Lamda (ALTA PERFORMANCE)
-            var myListExpenseItemViewModel = this.MyRequests.Select(p => new RequestItemViewModel
+            var myListRequestItemViewModel = this.MyRequests.Select(p => new RequestItemViewModel
             {
                 Approved = p.Approved,
                 Comments = p.Comments,
@@ -167,7 +167,7 @@
                 UserId = p.UserId,
             });
             this.Requests = new ObservableCollection<RequestItemViewModel>(
-                myListExpenseItemViewModel.OrderBy(p => p.Description));
+                myListRequestItemViewModel.OrderBy(p => p.Description));
 
         }
 

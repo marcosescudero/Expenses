@@ -6,9 +6,9 @@
     [Table("Expense")]
     public class ExpenseLocal
     {
-        public int ExpenseDetailId { get; set; }
-
         public int ExpenseId { get; set; }
+
+        public int RequestId { get; set; }
 
         public DateTime ExpenseDate { get; set; }
 
@@ -21,6 +21,8 @@
         public int DocumentTypeId { get; set; }
 
         public string DocumentNumber { get; set; }
+
+        public int CurrencyId { get; set; }
 
         public decimal Amount { get; set; }
 

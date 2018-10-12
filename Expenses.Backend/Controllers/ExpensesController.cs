@@ -19,7 +19,13 @@ namespace Expenses.Backend.Controllers
         // GET: Expenses
         public async Task<ActionResult> Index()
         {
-            var expenses = db.Expenses.Include(e => e.DocumentType).Include(e => e.ExpenseType).Include(e => e.PaymentType).Include(e => e.Request).Include(e => e.Vendor);
+            var expenses = db.Expenses
+                .Include(e => e.Currency)
+                .Include(e => e.DocumentType)
+                .Include(e => e.ExpenseType)
+                .Include(e => e.PaymentType)
+                .Include(e => e.Request)
+                .Include(e => e.Vendor);
             return View(await expenses.ToListAsync());
         }
 
@@ -41,6 +47,7 @@ namespace Expenses.Backend.Controllers
         // GET: Expenses/Create
         public ActionResult Create()
         {
+            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Description");
             ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description");
             ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description");
             ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description");
@@ -54,7 +61,7 @@ namespace Expenses.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
+        public async Task<ActionResult> Create([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,CurrencyId,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +70,7 @@ namespace Expenses.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Description", expense.CurrencyId);
             ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
             ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
             ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);
@@ -83,6 +91,7 @@ namespace Expenses.Backend.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Description", expense.CurrencyId);
             ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
             ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
             ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);
@@ -96,7 +105,7 @@ namespace Expenses.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
+        public async Task<ActionResult> Edit([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,CurrencyId,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -104,6 +113,7 @@ namespace Expenses.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.CurrencyId = new SelectList(db.Currencies, "CurrencyId", "Description", expense.CurrencyId);
             ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
             ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
             ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);

@@ -31,6 +31,9 @@
         [Display(Name = "Document Number")]
         public string DocumentNumber { get; set; }
 
+        [Display(Name = "Currency")]
+        public int CurrencyId { get; set; }
+
         [Display(Name = "Neto")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Amount { get; set; }

@@ -29,7 +29,7 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding EditCountCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding EditExpenseCommand}"/>
                                 </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

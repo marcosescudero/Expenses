@@ -109,9 +109,47 @@
             }
         }
 
+        public async Task<List<ExpenseLocal>> GetAllExpenses()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<ExpenseLocal>("select * from [Expense]");
+                var array = query.ToArray();
+                var list = array.Select(p => new ExpenseLocal
+                {
+                Amount = p.Amount,
+                AmountIVA = p.AmountIVA,
+                AmountPercepcion = p.AmountPercepcion,
+                Comments = p.Comments,
+                DocumentNumber = p.DocumentNumber,
+                DocumentTypeId = p.DocumentTypeId,
+                ExpenseDate = p.ExpenseDate,
+                RequestId = p.RequestId,
+                ExpenseId = p.ExpenseId,
+                ExpenseTypeId = p.ExpenseTypeId,
+                ImageArray = p.ImageArray,
+                ImagePath = p.ImagePath,
+                PaymentTypeId = p.PaymentTypeId,
+                TotalAmount = p.TotalAmount,
+                VendorId = p.VendorId,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
+
         public async Task DeleteAllRequests()
         {
             var query = await this.connection.QueryAsync<RequestLocal>("delete from [Request]");
+        }
+
+        public async Task DeleteAllExpenses()
+        {
+            var query = await this.connection.QueryAsync<ExpenseLocal>("delete from [Expense]");
         }
 
         public async Task DeleteAllCurrencies()
