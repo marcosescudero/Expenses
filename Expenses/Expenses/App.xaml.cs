@@ -11,6 +11,8 @@ namespace Expenses
     
     public partial class App : Application
     {
+        public static NavigationPage Navigator { get; internal set; }
+
         public App()
         {
             InitializeComponent();
@@ -26,16 +28,10 @@ namespace Expenses
                 }
                 if (Settings.AccessToken != null && expireDate > DateTime.Now)
                 {
-                    /*
-                    mainViewModel.MeasureUnits = new MeasureUnitsViewModel();
-                    mainViewModel.Locations = new LocationsViewModel();
-                    mainViewModel.Items = new ItemsViewModel();
-                    mainViewModel.Items.IsRefreshing = false;
-                    this.MainPage = new MasterPage();
-                    */
                     mainViewModel.Currencies = new CurrenciesViewModel();
-                    mainViewModel.Expenses = new ExpensesViewModel();
-                    MainPage = new NavigationPage(new ExpensesPage());
+                    mainViewModel.Requests = new RequestsViewModel();
+                    //MainPage = new NavigationPage(new ExpensesPage());
+                    this.MainPage = new MasterPage();
                 }
                 else
                 {

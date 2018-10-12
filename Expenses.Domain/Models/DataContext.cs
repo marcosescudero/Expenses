@@ -19,9 +19,9 @@ namespace Expenses.Domain.Models
 
         public System.Data.Entity.DbSet<Expenses.Common.Models.Vendor> Vendors { get; set; }
 
-        public System.Data.Entity.DbSet<Expenses.Common.Models.Expense> Expenses { get; set; }
+        public System.Data.Entity.DbSet<Expenses.Common.Models.Request> Requests { get; set; }
 
-        public System.Data.Entity.DbSet<Expenses.Common.Models.ExpenseDetail> ExpenseDetails { get; set; }
+        public System.Data.Entity.DbSet<Expenses.Common.Models.Expense> Expenses { get; set; }
 
     }
 

@@ -10,11 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace Expenses.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditExpensePage : ContentPage
-	{
-		public EditExpensePage ()
+	public partial class MasterPage : MasterDetailPage
+    {
+		public MasterPage ()
 		{
 			InitializeComponent ();
 		}
-	}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            App.Navigator = Navigator;
+        }
+    }
 }

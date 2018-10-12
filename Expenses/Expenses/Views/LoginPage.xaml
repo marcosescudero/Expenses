@@ -13,37 +13,64 @@
                 Padding="5">
                 <Image  
                     HeightRequest="150"
-                    Source="login2">
+                    Source="login4">
                 </Image>
                 <Grid
                     Margin="10,0"
                     VerticalOptions="CenterAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
+                    <Image  
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        HeightRequest="48"
+                        WidthRequest="48"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Source="ic_person">
+                    </Image>
+                    <!--
                     <Label
+                        FontSize="Small"
                         Grid.Row="0"
                         Grid.Column="0"
                         Text="{i18n:Translate EMail}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
+                    -->
                     <Entry
+                        FontSize="Small"
                         Grid.Row="0"
                         Grid.Column="1"
                         Keyboard="Email"
                         Text="{Binding Email}"
                         Placeholder="{i18n:Translate EmailPlaceHolder}">
                     </Entry>
+                    <Image  
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        HeightRequest="48"
+                        WidthRequest="48"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Source="ic_vpn_key">
+                    </Image>
+
+                    <!--
                     <Label
+                        FontSize="Small"
                         Grid.Row="1"
                         Grid.Column="0"
                         Text="{i18n:Translate Password}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
+                    -->
                     <Entry
+                        FontSize="Small"
                         Grid.Row="1"
                         Grid.Column="1"
                         IsPassword="true"

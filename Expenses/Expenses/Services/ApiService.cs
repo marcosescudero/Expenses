@@ -51,7 +51,7 @@
             try
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri(urlBase+'/');
+                client.BaseAddress = new Uri(urlBase);
                 var response = await client.PostAsync("Token",
                     new StringContent(string.Format(
                     "grant_type=password&userName={0}&password={1}",

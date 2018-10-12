@@ -29,10 +29,10 @@
         {
             var databasePath = DependencyService.Get<IPathService>().GetDatabasePath();
             this.connection = new SQLiteAsyncConnection(databasePath);
-            await connection.CreateTableAsync<ExpenseLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<RequestLocal>().ConfigureAwait(false);
             await connection.CreateTableAsync<CurrencyLocal>().ConfigureAwait(false);
             await connection.CreateTableAsync<DocumentTypeLocal>().ConfigureAwait(false);
-            await connection.CreateTableAsync<ExpenseDetailLocal>().ConfigureAwait(false);
+            await connection.CreateTableAsync<ExpenseLocal>().ConfigureAwait(false);
             await connection.CreateTableAsync<ExpenseTypeLocal>().ConfigureAwait(false);
             await connection.CreateTableAsync<PaymentTypeLocal>().ConfigureAwait(false);
             await connection.CreateTableAsync<VendorLocal>().ConfigureAwait(false);
@@ -63,13 +63,13 @@
             await this.connection.DeleteAsync(model);
         }
 
-        public async Task<List<ExpenseLocal>> GetAllExpenses()
+        public async Task<List<RequestLocal>> GetAllRequests()
         {
             try
             {
-                var query = await this.connection.QueryAsync<ExpenseLocal>("select * from [Expense]");
+                var query = await this.connection.QueryAsync<RequestLocal>("select * from [Request]");
                 var array = query.ToArray();
-                var list = array.Select(p => new ExpenseLocal
+                var list = array.Select(p => new RequestLocal
                 {
                     Approved = p.Approved,
                     Comments = p.Comments,
@@ -109,9 +109,9 @@
             }
         }
 
-        public async Task DeleteAllExpenses()
+        public async Task DeleteAllRequests()
         {
-            var query = await this.connection.QueryAsync<ExpenseLocal>("delete from [Expense]");
+            var query = await this.connection.QueryAsync<RequestLocal>("delete from [Request]");
         }
 
         public async Task DeleteAllCurrencies()

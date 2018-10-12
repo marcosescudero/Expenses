@@ -12,7 +12,7 @@
         public string Symbol { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
 
     }
 }

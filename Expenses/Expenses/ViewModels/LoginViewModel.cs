@@ -49,12 +49,31 @@
         #endregion
 
         #region Commands
+
+        public ICommand RegisterCommand
+        {
+            get
+            {
+                return new RelayCommand(Register);
+            }
+
+        }
+
+        private async void Register()
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                Languages.Atention,
+                Languages.NotImplemented,
+                Languages.Accept
+                );
+            return;
+        }
+
         public ICommand LoginCommand
         {
             get
             {
                 return new RelayCommand(Login);
-
             }
         }
 
@@ -69,6 +88,7 @@
                     );
                 return;
             }
+
             if (string.IsNullOrEmpty(this.Password))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -76,6 +96,14 @@
                     Languages.PasswordValidation,
                     Languages.Accept
                     );
+                return;
+            }
+            if (!RegexHelper.IsValidEmailAddress(this.Email))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.EMailError,
+                    Languages.Accept);
                 return;
             }
 
@@ -119,10 +147,9 @@
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Currencies = new CurrenciesViewModel();
-            mainViewModel.Expenses = new ExpensesViewModel();
-            Application.Current.MainPage = new ExpensesPage();
-
-            //Application.Current.MainPage = new MasterPage();
+            mainViewModel.Requests = new RequestsViewModel();
+            //Application.Current.MainPage = new ExpensesPage();
+            Application.Current.MainPage = new MasterPage();
 
             //this.IsRunning = false;
             //this.IsEnabled = true;

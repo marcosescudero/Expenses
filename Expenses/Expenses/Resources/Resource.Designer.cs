@@ -106,6 +106,15 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Atention.
+        /// </summary>
+        public static string Atention {
+            get {
+                return ResourceManager.GetString("Atention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -255,6 +264,15 @@ namespace Expenses.Resources {
         public static string Expenses {
             get {
                 return ResourceManager.GetString("Expenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expenses Request.
+        /// </summary>
+        public static string ExpensesRequests {
+            get {
+                return ResourceManager.GetString("ExpensesRequests", resourceCulture);
             }
         }
         
@@ -435,6 +453,15 @@ namespace Expenses.Resources {
         public static string NoPaymentTypeMessage {
             get {
                 return ResourceManager.GetString("NoPaymentTypeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Functionality not implemented in this demo version.
+        /// </summary>
+        public static string NotImplemented {
+            get {
+                return ResourceManager.GetString("NotImplemented", resourceCulture);
             }
         }
         

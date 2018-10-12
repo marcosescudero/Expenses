@@ -5,29 +5,31 @@
              x:Class="Expenses.Views.ExpensesPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{i18n:Translate Expenses}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="ic_action_add_circle" Command="{Binding AddExpenseCommand}"/>
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Expenses}"
             Padding="5">
+            <SearchBar
+                HeightRequest="30"
+                Placeholder="{i18n:Translate Search}"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding Filter}">
+            </SearchBar>
             <ListView
                 HasUnevenRows="True"
                 IsRefreshing="{Binding IsRefreshing}"
                 IsPullToRefreshEnabled="True"
-                ItemsSource="{Binding Expenses}"
+                ItemsSource="{Binding Items}"
                 RefreshCommand="{Binding RefreshCommand}">
+                <ListView.Footer>
+                    <Label Text="Grvppe Latam" />
+                </ListView.Footer>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="{i18n:Translate Edit}" Command="{Binding EditExpenseCommand}"/>
-                                <MenuItem Text="{i18n:Translate Delete}" Command="{Binding DeleteExpenseCommand}" IsDestructive="True"/>
-                            </ViewCell.ContextActions>
                             <Grid>
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding EditExpenseCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding EditCountCommand}"/>
                                 </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -36,12 +38,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Grid.Column="0"
-                                    Text="{Binding ExpenseDateStart, StringFormat='\{0:d/M/yy}'}">
+                                    FontAttributes="Bold" 
+                                    Text="{Binding ItemId}"
+                                    TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Label
-                                    FontAttributes="Bold"
                                     Grid.Column="1"
-                                    Text="{Binding Description}">
+                                    FontAttributes="Bold" 
+                                    Text="{Binding Description}"
+                                    TextColor="{StaticResource FontColor}">
                                 </Label>
                                 <Image
                                     Grid.Column="2"

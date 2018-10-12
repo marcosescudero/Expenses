@@ -21,7 +21,13 @@ namespace Expenses.API.Controllers
         // GET: api/Expenses
         public IQueryable<Expense> GetExpenses()
         {
-            return db.Expenses;
+            return db.Expenses
+                .Include(p => p.Currency)
+                .Include(p => p.PaymentType)
+                .Include(p => p.DocumentType)
+                .Include(p => p.ExpenseType)
+                .Include(p => p.Vendor)
+                .Include(p => p.Request);
         }
 
         // GET: api/Expenses/5

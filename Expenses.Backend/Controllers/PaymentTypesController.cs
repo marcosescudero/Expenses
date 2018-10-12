@@ -12,7 +12,6 @@ using Expenses.Common.Models;
 
 namespace Expenses.Backend.Controllers
 {
-    [Authorize]
     public class PaymentTypesController : Controller
     {
         private LocalDataContext db = new LocalDataContext();

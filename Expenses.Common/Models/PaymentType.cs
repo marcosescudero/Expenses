@@ -9,7 +9,7 @@
         public int PaymentTypeId { get; set; }
         public string Description { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
 
     }
 }

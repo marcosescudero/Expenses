@@ -12,7 +12,6 @@ using Expenses.Common.Models;
 
 namespace Expenses.Backend.Controllers
 {
-    [Authorize]
     public class ExpensesController : Controller
     {
         private LocalDataContext db = new LocalDataContext();
@@ -20,7 +19,8 @@ namespace Expenses.Backend.Controllers
         // GET: Expenses
         public async Task<ActionResult> Index()
         {
-            return View(await db.Expenses.ToListAsync());
+            var expenses = db.Expenses.Include(e => e.DocumentType).Include(e => e.ExpenseType).Include(e => e.PaymentType).Include(e => e.Request).Include(e => e.Vendor);
+            return View(await expenses.ToListAsync());
         }
 
         // GET: Expenses/Details/5
@@ -41,6 +41,11 @@ namespace Expenses.Backend.Controllers
         // GET: Expenses/Create
         public ActionResult Create()
         {
+            ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description");
+            ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description");
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description");
+            ViewBag.RequestId = new SelectList(db.Requests, "RequestId", "Description");
+            ViewBag.VendorId = new SelectList(db.Vendors, "VendorId", "Name");
             return View();
         }
 
@@ -49,7 +54,7 @@ namespace Expenses.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ExpenseId,Description,Comments,ExpenseDateStart,ExpenseDateEnd,UserId,Approved")] Expense expense)
+        public async Task<ActionResult> Create([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +63,11 @@ namespace Expenses.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
+            ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);
+            ViewBag.RequestId = new SelectList(db.Requests, "RequestId", "Description", expense.RequestId);
+            ViewBag.VendorId = new SelectList(db.Vendors, "VendorId", "Name", expense.VendorId);
             return View(expense);
         }
 
@@ -73,6 +83,11 @@ namespace Expenses.Backend.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
+            ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);
+            ViewBag.RequestId = new SelectList(db.Requests, "RequestId", "Description", expense.RequestId);
+            ViewBag.VendorId = new SelectList(db.Vendors, "VendorId", "Name", expense.VendorId);
             return View(expense);
         }
 
@@ -81,7 +96,7 @@ namespace Expenses.Backend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ExpenseId,Description,Comments,ExpenseDateStart,ExpenseDateEnd,UserId,Approved")] Expense expense)
+        public async Task<ActionResult> Edit([Bind(Include = "ExpenseId,RequestId,ExpenseDate,VendorId,ExpenseTypeId,PaymentTypeId,DocumentTypeId,DocumentNumber,Amount,AmountIVA,AmountPercepcion,TotalAmount,Comments,ImagePath")] Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +104,11 @@ namespace Expenses.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.DocumentTypeId = new SelectList(db.DocumentTypes, "DocumentTypeId", "Description", expense.DocumentTypeId);
+            ViewBag.ExpenseTypeId = new SelectList(db.ExpenseTypes, "ExpenseTypeId", "Description", expense.ExpenseTypeId);
+            ViewBag.PaymentTypeId = new SelectList(db.PaymentTypes, "PaymentTypeId", "Description", expense.PaymentTypeId);
+            ViewBag.RequestId = new SelectList(db.Requests, "RequestId", "Description", expense.RequestId);
+            ViewBag.VendorId = new SelectList(db.Vendors, "VendorId", "Name", expense.VendorId);
             return View(expense);
         }
 

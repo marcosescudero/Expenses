@@ -16,7 +16,7 @@ namespace Expenses.Common.Models
         [StringLength(13)]
         public string Cuit { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
         public override string ToString()
         {
             return this.Alias;

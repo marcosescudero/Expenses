@@ -320,4 +320,13 @@
   <data name="NoDocumentTypeMessage" xml:space="preserve">
     <value>No hay información disponible sobre tipos de documentos!</value>
   </data>
+  <data name="NotImplemented" xml:space="preserve">
+    <value>Funcionalidad no implementada en esta versión demo</value>
+  </data>
+  <data name="Atention" xml:space="preserve">
+    <value>Atención!</value>
+  </data>
+  <data name="ExpensesRequests" xml:space="preserve">
+    <value>Solicitud de gastos</value>
+  </data>
 </root>

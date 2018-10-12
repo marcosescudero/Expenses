@@ -11,6 +11,6 @@
         [StringLength(3)]
         public string DocumentCode { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ExpenseDetail> ExpenseDetails { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
     }
 }

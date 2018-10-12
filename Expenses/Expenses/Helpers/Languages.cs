@@ -327,7 +327,17 @@ namespace Expenses.Helpers
         {
             get { return Resource.NoPaymentTypeMessage; }
         }
-
-
+        public static string NotImplemented
+        {
+            get { return Resource.NotImplemented; }
+        }
+        public static string Atention
+        {
+            get { return Resource.Atention; }
+        }
+        public static string ExpensesRequests
+        {
+            get { return Resource.ExpensesRequests; }
+        }
     }
 }

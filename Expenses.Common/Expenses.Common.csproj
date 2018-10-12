@@ -63,9 +63,9 @@
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="Models\Expense.cs" />
-    <Compile Include="Models\ExpenseDetail.cs" />
     <Compile Include="Models\ExpenseType.cs" />
     <Compile Include="Models\PaymentType.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\TokenResponse.cs" />
     <Compile Include="Models\UserRequest.cs" />
