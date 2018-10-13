@@ -330,4 +330,7 @@
   <data name="ExpensesRequests" xml:space="preserve">
     <value>Expenses Request</value>
   </data>
+  <data name="ExpenseDate" xml:space="preserve">
+    <value>Expense Date</value>
+  </data>
 </root>

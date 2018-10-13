@@ -30,8 +30,10 @@ namespace Expenses
                 {
                     mainViewModel.Currencies = new CurrenciesViewModel();
                     mainViewModel.DocumentTypes = new DocumentTypesViewModel();
+                    mainViewModel.PaymentTypes = new PaymentTypesViewModel();
+                    mainViewModel.ExpenseTypes = new ExpenseTypesViewModel();
+                    mainViewModel.Vendors = new VendorsViewModel();
                     mainViewModel.Requests = new RequestsViewModel();
-                    //MainPage = new NavigationPage(new ExpensesPage());
                     this.MainPage = new MasterPage();
                 }
                 else

@@ -259,6 +259,15 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expense Date.
+        /// </summary>
+        public static string ExpenseDate {
+            get {
+                return ResourceManager.GetString("ExpenseDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expenses.
         /// </summary>
         public static string Expenses {

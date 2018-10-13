@@ -11,7 +11,7 @@ namespace Expenses.ViewModels
     using Services;
     using Xamarin.Forms;
 
-    public class DocumentTypesViewModel : BaseViewModel
+    public class PaymentTypesViewModel : BaseViewModel
     {
         #region Services
         private ApiService apiService;
@@ -24,8 +24,8 @@ namespace Expenses.ViewModels
         #endregion
 
         #region Properties
-        public List<DocumentType> MyDocumentTypes { get; set; }
-        public List<DocumentTypeLocal> MyDocumentTypesLocal { get; set; }
+        public List<PaymentType> MyPaymentTypes { get; set; }
+        public List<PaymentTypeLocal> MyPaymentTypesLocal { get; set; }
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -39,30 +39,30 @@ namespace Expenses.ViewModels
         #endregion
 
         #region Singleton
-        private static DocumentTypesViewModel instance; // Atributo
-        public static DocumentTypesViewModel GetInstance()
+        private static PaymentTypesViewModel instance; // Atributo
+        public static PaymentTypesViewModel GetInstance()
         {
             if (instance == null)
             {
-                instance = new DocumentTypesViewModel();
+                instance = new PaymentTypesViewModel();
             }
             return instance;
         }
         #endregion
 
         #region Constructors
-        public DocumentTypesViewModel()
+        public PaymentTypesViewModel()
         {
             instance = this;
             this.apiService = new ApiService();
             this.dataService = new DataService();
-            this.LoadDocumentTypes();
+            this.LoadPaymentTypes();
             this.IsRefreshing = false;
         }
         #endregion
 
         #region Methods
-        private async void LoadDocumentTypes()
+        private async void LoadPaymentTypes()
         {
             this.IsRefreshing = true;
             this.IsEnabled = false;
@@ -81,7 +81,7 @@ namespace Expenses.ViewModels
                 await this.LoadFromDB();
             }
 
-            if (this.MyDocumentTypes == null || this.MyDocumentTypes.Count == 0)
+            if (this.MyPaymentTypes == null || this.MyPaymentTypes.Count == 0)
             {
                 this.IsRefreshing = false;
                 this.IsEnabled = true;
@@ -96,18 +96,17 @@ namespace Expenses.ViewModels
             //var response = await this.apiService.GetList<Product>("http://200.55.241.235", "/InvAPI/api", "/Products");
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
-            var controller = Application.Current.Resources["UrlDocumentTypesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
+            var controller = Application.Current.Resources["UrlPaymentTypesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
             var response = await this.apiService.GetList<DocumentType>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
             if (!response.IsSuccess)
             {
                 return false;
             }
-            this.MyDocumentTypes = (List<DocumentType>)response.Result; // hay que castearlo
-            this.MyDocumentTypesLocal = this.MyDocumentTypes.Select(P => new DocumentTypeLocal
+            this.MyPaymentTypes = (List<PaymentType>)response.Result; // hay que castearlo
+            this.MyPaymentTypesLocal = this.MyPaymentTypes.Select(P => new PaymentTypeLocal
             {
-                DocumentTypeId = P.DocumentTypeId,
+                PaymentTypeId = P.PaymentTypeId,
                 Description = P.Description,
-                DocumentCode = P.DocumentCode,
             }).ToList();
             return true;
         }
@@ -115,18 +114,17 @@ namespace Expenses.ViewModels
         private async Task SaveToSqlite()
         {
             await this.dataService.DeleteAllDocumentTypes();
-            this.dataService.Insert(this.MyDocumentTypesLocal); // Nota: En este método no necesitamos el await.
+            this.dataService.Insert(this.MyPaymentTypesLocal); // Nota: En este método no necesitamos el await.
         }
 
         private async Task LoadFromDB()
         {
-            this.MyDocumentTypesLocal = await this.dataService.GetAllDocumentTypes();
+            this.MyPaymentTypesLocal = await this.dataService.GetAllPaymentTypes();
 
-            this.MyDocumentTypes = this.MyDocumentTypesLocal.Select(p => new DocumentType
+            this.MyPaymentTypes = this.MyPaymentTypesLocal.Select(p => new PaymentType
             {
-                DocumentTypeId = p.DocumentTypeId,
+                PaymentTypeId = p.PaymentTypeId,
                 Description = p.Description,
-                DocumentCode = p.DocumentCode,
             }).ToList();
         }
         #endregion

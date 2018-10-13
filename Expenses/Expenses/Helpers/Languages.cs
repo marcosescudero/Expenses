@@ -339,5 +339,10 @@ namespace Expenses.Helpers
         {
             get { return Resource.ExpensesRequests; }
         }
+        public static string ExpenseDate
+        {
+            get { return Resource.ExpenseDate; }
+        }
+
     }
 }

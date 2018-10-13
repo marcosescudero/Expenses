@@ -15,6 +15,9 @@
         public LoginViewModel Login { get; set; }
         public CurrenciesViewModel Currencies { get; set; }
         public DocumentTypesViewModel DocumentTypes { get; set; }
+        public PaymentTypesViewModel PaymentTypes { get; set; }
+        public ExpenseTypesViewModel ExpenseTypes { get; set; }
+        public VendorsViewModel Vendors { get; set; }
         public RequestsViewModel Requests { get; set; }
         public ExpensesViewModel Expenses { get; set; }
         public EditExpenseViewModel EditExpense { get; set; }

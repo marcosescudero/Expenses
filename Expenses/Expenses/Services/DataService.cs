@@ -130,6 +130,68 @@
             }
         }
 
+        public async Task<List<ExpenseTypeLocal>> GetAllExpenseTypes()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<ExpenseTypeLocal>("select * from [ExpenseType]");
+                var array = query.ToArray();
+                var list = array.Select(p => new ExpenseTypeLocal
+                {
+                    ExpenseTypeId = p.ExpenseTypeId,
+                    Description = p.Description,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
+
+        public async Task<List<PaymentTypeLocal>> GetAllPaymentTypes()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<PaymentTypeLocal>("select * from [PaymentType]");
+                var array = query.ToArray();
+                var list = array.Select(p => new PaymentTypeLocal
+                {
+                    PaymentTypeId = p.PaymentTypeId,
+                    Description = p.Description,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
+
+        public async Task<List<VendorLocal>> GetAllVendors()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<VendorLocal>("select * from [Vendor]");
+                var array = query.ToArray();
+                var list = array.Select(p => new VendorLocal
+                {
+                    VendorId = p.VendorId,
+                    Name = p.Name,
+                    Alias = p.Alias,
+                    Cuit = p.Cuit,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
+
         public async Task<List<ExpenseLocal>> GetAllExpenses()
         {
             try
@@ -181,6 +243,21 @@
         public async Task DeleteAllDocumentTypes()
         {
             var query = await this.connection.QueryAsync<DocumentTypeLocal>("delete from [DocumentType]");
+        }
+
+        public async Task DeleteAllExpenseTypes()
+        {
+            var query = await this.connection.QueryAsync<ExpenseTypeLocal>("delete from [ExpenseType]");
+        }
+
+        public async Task DeleteAllPaymentTypes()
+        {
+            var query = await this.connection.QueryAsync<PaymentTypeLocal>("delete from [PaymentType]");
+        }
+
+        public async Task DeleteAllVendors()
+        {
+            var query = await this.connection.QueryAsync<VendorLocal>("delete from [Vendor]");
         }
         #endregion
     }

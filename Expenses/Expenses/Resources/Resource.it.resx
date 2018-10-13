@@ -329,4 +329,7 @@
   <data name="EditExpense" xml:space="preserve">
     <value>Modifica di spesa</value>
   </data>
+  <data name="ExpenseDate" xml:space="preserve">
+    <value>Data di spesa</value>
+  </data>
 </root>
