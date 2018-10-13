@@ -32,7 +32,6 @@
                                     Text="{Binding ExpenseDateStart, StringFormat='\{0:d/M/yy}'}">
                                 </Label>
                                 <Label
-                                    FontAttributes="Bold"
                                     Grid.Column="1"
                                     Text="{Binding Description}">
                                 </Label>

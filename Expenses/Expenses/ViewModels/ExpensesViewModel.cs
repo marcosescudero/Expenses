@@ -155,7 +155,7 @@ namespace Expenses.ViewModels
                 VendorId = p.VendorId,
             }).Where(p => p.RequestId == (this.Request!=null?this.Request.RequestId:p.RequestId)).ToList();
 
-            this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
+            //this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
 
             //if (this.Request != null)
             //    this.MyExpenses = this.MyExpenses.Where(p => p.RequestId == this.Request.RequestId).ToList();
@@ -207,7 +207,7 @@ namespace Expenses.ViewModels
             if (this.Request != null)
                 this.MyExpenses = this.MyExpenses.Where(p => p.RequestId == this.Request.RequestId).ToList();
 
-            this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
+            //this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
             return true;
         }
 
@@ -242,9 +242,9 @@ namespace Expenses.ViewModels
                     PaymentType = p.PaymentType,
                     Vendor = p.Vendor,
                 });
+
                 this.Expenses = new ObservableCollection<ExpenseItemViewModel>(
                      myListExpenseItemViewModel.OrderBy(p => p.ExpenseDate));
-
             }
             else
             {
@@ -273,10 +273,12 @@ namespace Expenses.ViewModels
                     PaymentType = p.PaymentType,
                     Vendor = p.Vendor,
                 }).Where(p => p.ExpenseType.Description.ToLower().Contains(this.Filter.ToLower())).ToList();
+
                 this.Expenses = new ObservableCollection<ExpenseItemViewModel>(
                     myListExpenseItemViewModel.OrderBy(p => p.ExpenseDate));
             }
 
+            this.TotalExpenses = this.Expenses.Select(x => x.TotalAmount).Sum();
             this.IsRefreshing = false;
         }
 
