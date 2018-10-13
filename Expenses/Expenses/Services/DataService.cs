@@ -92,13 +92,34 @@
         {
             try
             {
-                var query = await this.connection.QueryAsync<CurrencyLocal>("select * from [MeasureUnit]");
+                var query = await this.connection.QueryAsync<CurrencyLocal>("select * from [Currency]");
                 var array = query.ToArray();
                 var list = array.Select(p => new CurrencyLocal
                 {
                     CurrencyId = p.CurrencyId,
                     Description = p.Description,
                     Symbol = p.Symbol,
+                }).ToList();
+                return list;
+            }
+            catch (Exception e)
+            {
+                var errormessage = e.Message.ToString();
+                return null;
+            }
+        }
+
+        public async Task<List<DocumentTypeLocal>> GetAllDocumentTypes()
+        {
+            try
+            {
+                var query = await this.connection.QueryAsync<DocumentTypeLocal>("select * from [DocumentType]");
+                var array = query.ToArray();
+                var list = array.Select(p => new DocumentTypeLocal
+                {
+                    DocumentTypeId = p.DocumentTypeId,
+                    Description = p.Description,
+                    DocumentCode = p.DocumentCode,
                 }).ToList();
                 return list;
             }
@@ -155,6 +176,11 @@
         public async Task DeleteAllCurrencies()
         {
             var query = await this.connection.QueryAsync<CurrencyLocal>("delete from [Currency]");
+        }
+
+        public async Task DeleteAllDocumentTypes()
+        {
+            var query = await this.connection.QueryAsync<DocumentTypeLocal>("delete from [DocumentType]");
         }
         #endregion
     }

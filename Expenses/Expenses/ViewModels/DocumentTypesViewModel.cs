@@ -11,7 +11,7 @@ namespace Expenses.ViewModels
     using Services;
     using Xamarin.Forms;
 
-    public class CurrenciesViewModel : BaseViewModel
+    public class DocumentTypesViewModel : BaseViewModel
     {
         #region Services
         private ApiService apiService;
@@ -24,8 +24,8 @@ namespace Expenses.ViewModels
         #endregion
 
         #region Properties
-        public List<Currency> MyCurrencies { get; set; }
-        public List<CurrencyLocal> MyCurrenciesLocal { get; set; }
+        public List<DocumentType> MyDocumentTypes { get; set; }
+        public List<DocumentTypeLocal> MyDocumentTypesLocal { get; set; }
         public bool IsRefreshing
         {
             get { return this.isRefreshing; }
@@ -39,30 +39,30 @@ namespace Expenses.ViewModels
         #endregion
 
         #region Singleton
-        private static CurrenciesViewModel instance; // Atributo
-        public static CurrenciesViewModel GetInstance()
+        private static DocumentTypesViewModel instance; // Atributo
+        public static DocumentTypesViewModel GetInstance()
         {
             if (instance == null)
             {
-                instance = new CurrenciesViewModel();
+                instance = new DocumentTypesViewModel();
             }
             return instance;
         }
         #endregion
 
         #region Constructors
-        public CurrenciesViewModel()
+        public DocumentTypesViewModel()
         {
             instance = this;
             this.apiService = new ApiService();
             this.dataService = new DataService();
-            this.LoadCurrencies();
+            this.LoadDocumentTypes();
             this.IsRefreshing = false;
         }
         #endregion
 
         #region Methods
-        private async void LoadCurrencies()
+        private async void LoadDocumentTypes()
         {
             this.IsRefreshing = true;
             this.IsEnabled = false;
@@ -81,11 +81,11 @@ namespace Expenses.ViewModels
                 await this.LoadFromDB();
             }
 
-            if (this.MyCurrencies == null || this.MyCurrencies.Count == 0)
+            if (this.MyDocumentTypes == null || this.MyDocumentTypes.Count == 0)
             {
                 this.IsRefreshing = false;
                 this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoCurrenciesMessage, Languages.Accept);
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoDocumentTypesMessage, Languages.Accept);
                 return;
             }
             this.IsRefreshing = false;
@@ -96,37 +96,37 @@ namespace Expenses.ViewModels
             //var response = await this.apiService.GetList<Product>("http://200.55.241.235", "/InvAPI/api", "/Products");
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
-            var controller = Application.Current.Resources["UrlCurrenciesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
+            var controller = Application.Current.Resources["UrlDocumentTypesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
             var response = await this.apiService.GetList<Currency>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
             if (!response.IsSuccess)
             {
                 return false;
             }
-            this.MyCurrencies = (List<Currency>)response.Result; // hay que castearlo
-            this.MyCurrenciesLocal = this.MyCurrencies.Select(P => new CurrencyLocal
+            this.MyDocumentTypes = (List<DocumentType>)response.Result; // hay que castearlo
+            this.MyDocumentTypesLocal = this.MyDocumentTypes.Select(P => new DocumentTypeLocal
             {
-                CurrencyId = P.CurrencyId,
+                DocumentTypeId = P.DocumentTypeId,
                 Description = P.Description,
-                Symbol = P.Symbol,
+                DocumentCode = P.DocumentCode,
             }).ToList();
             return true;
         }
 
         private async Task SaveToSqlite()
         {
-            await this.dataService.DeleteAllCurrencies();
-            this.dataService.Insert(this.MyCurrenciesLocal); // Nota: En este método no necesitamos el await.
+            await this.dataService.DeleteAllDocumentTypes();
+            this.dataService.Insert(this.MyDocumentTypesLocal); // Nota: En este método no necesitamos el await.
         }
 
         private async Task LoadFromDB()
         {
-            this.MyCurrenciesLocal = await this.dataService.GetAllCurrencies();
+            this.MyDocumentTypesLocal = await this.dataService.GetAllDocumentTypes();
 
-            this.MyCurrencies = this.MyCurrenciesLocal.Select(p => new Currency
+            this.MyDocumentTypes = this.MyDocumentTypesLocal.Select(p => new DocumentType
             {
-                CurrencyId = p.CurrencyId,
+                DocumentTypeId = p.DocumentTypeId,
                 Description = p.Description,
-                Symbol = p.Symbol,
+                DocumentCode = p.DocumentCode,
             }).ToList();
         }
         #endregion

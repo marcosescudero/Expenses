@@ -35,8 +35,8 @@
 
         private async void EditExpense()
         {
-
-            //await App.Navigator.PushAsync(new ExpensesPage());
+            MainViewModel.GetInstance().EditExpense = new EditExpenseViewModel(this);
+            await App.Navigator.PushAsync(new EditExpensePage());
         }
         #endregion
 

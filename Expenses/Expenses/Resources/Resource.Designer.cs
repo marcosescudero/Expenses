@@ -196,11 +196,11 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Product.
+        ///   Looks up a localized string similar to Edit Expense.
         /// </summary>
-        public static string EditProduct {
+        public static string EditExpense {
             get {
-                return ResourceManager.GetString("EditProduct", resourceCulture);
+                return ResourceManager.GetString("EditExpense", resourceCulture);
             }
         }
         
@@ -414,9 +414,9 @@ namespace Expenses.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No information on document types available.
         /// </summary>
-        public static string NoDocumentTypeMessage {
+        public static string NoDocumentTypesMessage {
             get {
-                return ResourceManager.GetString("NoDocumentTypeMessage", resourceCulture);
+                return ResourceManager.GetString("NoDocumentTypesMessage", resourceCulture);
             }
         }
         
@@ -432,9 +432,9 @@ namespace Expenses.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No information on expense types available.
         /// </summary>
-        public static string NoExpenseTypeMessage {
+        public static string NoExpenseTypesMessage {
             get {
-                return ResourceManager.GetString("NoExpenseTypeMessage", resourceCulture);
+                return ResourceManager.GetString("NoExpenseTypesMessage", resourceCulture);
             }
         }
         
@@ -450,9 +450,9 @@ namespace Expenses.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No information on payment types available.
         /// </summary>
-        public static string NoPaymentTypeMessage {
+        public static string NoPaymentTypesMessage {
             get {
-                return ResourceManager.GetString("NoPaymentTypeMessage", resourceCulture);
+                return ResourceManager.GetString("NoPaymentTypesMessage", resourceCulture);
             }
         }
         
@@ -468,9 +468,9 @@ namespace Expenses.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No information on vendors available.
         /// </summary>
-        public static string NoVendorMessage {
+        public static string NoVendorsMessage {
             get {
-                return ResourceManager.GetString("NoVendorMessage", resourceCulture);
+                return ResourceManager.GetString("NoVendorsMessage", resourceCulture);
             }
         }
         

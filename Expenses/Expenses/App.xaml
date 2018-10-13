@@ -13,6 +13,10 @@
             <x:String x:Key="UrlAPI">http://200.55.241.235/ExpensesAPI/</x:String>
             <x:String x:Key="UrlPrefix">/api</x:String>
             <x:String x:Key="UrlCurrenciesController">/Currencies</x:String>
+            <x:String x:Key="UrlExpenseTypesController">/ExpenseTypes</x:String>
+            <x:String x:Key="UrlDocumentTypesController">/DocumentTypes</x:String>
+            <x:String x:Key="UrlPaymentTypesController">/PaymentTypes</x:String>
+            <x:String x:Key="UrlVendorsController">/Vendors</x:String>
             <x:String x:Key="UrlRequestsController">/Requests</x:String>
             <x:String x:Key="UrlExpensesController">/Expenses</x:String>
             <x:String x:Key="UrlUsersController">/Users</x:String>

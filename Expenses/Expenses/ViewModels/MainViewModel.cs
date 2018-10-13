@@ -14,9 +14,10 @@
         #region ViewModels
         public LoginViewModel Login { get; set; }
         public CurrenciesViewModel Currencies { get; set; }
+        public DocumentTypesViewModel DocumentTypes { get; set; }
         public RequestsViewModel Requests { get; set; }
         public ExpensesViewModel Expenses { get; set; }
-
+        public EditExpenseViewModel EditExpense { get; set; }
         #endregion
 
         #region Constructors
@@ -35,7 +36,6 @@
             {
                 instance = new MainViewModel();
             }
-
             return instance;
         }
         #endregion
@@ -64,6 +64,5 @@
             });
         }
         #endregion
-
     }
 }

@@ -160,8 +160,8 @@
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Currencies = new CurrenciesViewModel();
+            mainViewModel.DocumentTypes = new DocumentTypesViewModel();
             mainViewModel.Requests = new RequestsViewModel();
-            //Application.Current.MainPage = new ExpensesPage();
             Application.Current.MainPage = new MasterPage();
 
             //this.IsRunning = false;

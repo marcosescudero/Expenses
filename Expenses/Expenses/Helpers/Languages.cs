@@ -121,9 +121,9 @@ namespace Expenses.Helpers
         {
             get { return Resource.Confirm; }
         }
-        public static string EditProduct
+        public static string EditExpense
         {
-            get { return Resource.EditProduct; }
+            get { return Resource.EditExpense; }
         }
         public static string IsAvailable
         {
@@ -303,14 +303,14 @@ namespace Expenses.Helpers
             get { return Resource.RegisterConfirmation; }
         }
 
-        public static string NoExpenseTypeMessage
+        public static string NoExpenseTypesMessage
         {
-            get { return Resource.NoExpenseTypeMessage; }
+            get { return Resource.NoExpenseTypesMessage; }
         }
 
-        public static string NoDocumentTypeMessage
+        public static string NoDocumentTypesMessage
         {
-            get { return Resource.NoDocumentTypeMessage; }
+            get { return Resource.NoDocumentTypesMessage; }
         }
 
         public static string NoCurrenciesMessage
@@ -318,14 +318,14 @@ namespace Expenses.Helpers
             get { return Resource.NoCurrenciesMessage; }
         }
 
-        public static string NoVendorMessage
+        public static string NoVendorsMessage
         {
-            get { return Resource.NoVendorMessage; }
+            get { return Resource.NoVendorsMessage; }
         }
 
-        public static string NoPaymentTypeMessage
+        public static string NoPaymentTypesMessage
         {
-            get { return Resource.NoPaymentTypeMessage; }
+            get { return Resource.NoPaymentTypesMessage; }
         }
         public static string NotImplemented
         {

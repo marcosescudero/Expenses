@@ -191,9 +191,6 @@
   <data name="Confirm" xml:space="preserve">
     <value>¡Confirmar!</value>
   </data>
-  <data name="EditProduct" xml:space="preserve">
-    <value>Editar Producto</value>
-  </data>
   <data name="IsAvailable" xml:space="preserve">
     <value>Está disponible ?</value>
   </data>
@@ -308,16 +305,16 @@
   <data name="NoExpensesMessage" xml:space="preserve">
     <value>No hay información sobre los gastos disponibles.!</value>
   </data>
-  <data name="NoExpenseTypeMessage" xml:space="preserve">
+  <data name="NoExpenseTypesMessage" xml:space="preserve">
     <value>No hay información disponible sobre tipos de gastos!</value>
   </data>
-  <data name="NoPaymentTypeMessage" xml:space="preserve">
+  <data name="NoPaymentTypesMessage" xml:space="preserve">
     <value>No hay información sobre los tipos de pago disponibles!</value>
   </data>
-  <data name="NoVendorMessage" xml:space="preserve">
+  <data name="NoVendorsMessage" xml:space="preserve">
     <value>No hay información sobre los proveedores disponibles!</value>
   </data>
-  <data name="NoDocumentTypeMessage" xml:space="preserve">
+  <data name="NoDocumentTypesMessage" xml:space="preserve">
     <value>No hay información disponible sobre tipos de documentos!</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
@@ -328,5 +325,8 @@
   </data>
   <data name="ExpensesRequests" xml:space="preserve">
     <value>Solicitud de gastos</value>
+  </data>
+  <data name="EditExpense" xml:space="preserve">
+    <value>Editar gasto</value>
   </data>
 </root>

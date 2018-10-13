@@ -29,6 +29,7 @@ namespace Expenses
                 if (Settings.AccessToken != null && expireDate > DateTime.Now)
                 {
                     mainViewModel.Currencies = new CurrenciesViewModel();
+                    mainViewModel.DocumentTypes = new DocumentTypesViewModel();
                     mainViewModel.Requests = new RequestsViewModel();
                     //MainPage = new NavigationPage(new ExpensesPage());
                     this.MainPage = new MasterPage();
