@@ -332,4 +332,10 @@
   <data name="ExpenseDate" xml:space="preserve">
     <value>Fecha del gasto</value>
   </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sincronizar</value>
+  </data>
+  <data name="NoRequestMessage" xml:space="preserve">
+    <value>No hay información sobre la solicitud de gastos disponible!</value>
+  </data>
 </root>

@@ -63,49 +63,7 @@
                                 CommandParameter="Averiguar este parametro"/>
                         </Entry.Behaviors>
                     </Entry>
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Text="Expense Type"
-                        TextColor="{StaticResource FontColor}"
-                        VerticalOptions="Center">
-                    </Label>
-                    <Picker 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Title="--Select--"
-                        ItemDisplayBinding="{Binding Description}"
-                        ItemsSource="{Binding ExpenseType}"
-                        SelectedItem="{Binding ExpenseTypeSelected, Mode=TwoWay}">
-                    </Picker>
-                    <Label
-                        Grid.Row="3"
-                        Grid.Column="0"
-                        Text="Location"
-                        TextColor="{StaticResource FontColor}"
-                        VerticalOptions="Center">
-                    </Label>
-                    <Picker 
-                        Grid.Row="3"
-                        Grid.Column="1"
-                        Title="--Select--"
-                        ItemDisplayBinding="{Binding Description}"
-                        ItemsSource="{Binding Locations}"
-                        SelectedItem="{Binding LocationSelected, Mode=TwoWay}">
-                    </Picker>
-                    <Label
-                        Grid.Row="4"
-                        Grid.Column="0"
-                        Text="Quantity"
-                        TextColor="{StaticResource FontColor}"
-                        VerticalOptions="Center">
-                    </Label>
-                    <Entry
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Text="{Binding Quantity}"
-                        Keyboard="Telephone">
-                    </Entry>
+
                 </Grid>
                 <ActivityIndicator
                     IsRunning="{Binding IsRunning}"
@@ -132,7 +90,7 @@
                         HeightRequest="46"
                         HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Scan}"
+                        Text="{i18n:Translate Sync}"
                         TextColor="{StaticResource Icons}">
                     </Button>
                 </StackLayout>

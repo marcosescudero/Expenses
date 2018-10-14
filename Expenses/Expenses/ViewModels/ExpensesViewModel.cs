@@ -153,6 +153,8 @@ namespace Expenses.ViewModels
                 PaymentTypeId = p.PaymentTypeId,
                 TotalAmount = p.TotalAmount,
                 VendorId = p.VendorId,
+                ExpenseType = MainViewModel.GetInstance().ExpenseTypes.MyExpenseTypes.Where(q => q.ExpenseTypeId == p.ExpenseTypeId).FirstOrDefault(),
+
             }).Where(p => p.RequestId == (this.Request!=null?this.Request.RequestId:p.RequestId)).ToList();
 
             //this.TotalExpenses = this.MyExpenses.Select(x => x.TotalAmount).Sum();
@@ -163,7 +165,7 @@ namespace Expenses.ViewModels
 
         private async Task SaveExpensesToDB()
         {
-            await this.dataService.DeleteAllRequests();
+            await this.dataService.DeleteAllExpenses();
             this.dataService.Insert(this.MyExpensesLocal);
         }
 

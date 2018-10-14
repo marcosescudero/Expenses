@@ -343,6 +343,15 @@ namespace Expenses.Helpers
         {
             get { return Resource.ExpenseDate; }
         }
+        public static string Sync
+        {
+            get { return Resource.Sync; }
+        }
+        public static string NoRequestMessage
+        {
+            get { return Resource.NoRequestMessage; }
+        }
 
+        
     }
 }

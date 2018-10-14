@@ -85,7 +85,7 @@
             if (this.MyRequests == null || this.MyRequests.Count == 0)
             {
                 this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoExpensesMessage, Languages.Accept);
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, Languages.NoRequestMessage, Languages.Accept);
                 return;
             }
 
@@ -122,7 +122,6 @@
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
             var controller = Application.Current.Resources["UrlRequestsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-
             var response = await this.apiService.GetList<Request>(url, prefix, controller);
             //var response = await this.apiService.GetList<Expense>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 

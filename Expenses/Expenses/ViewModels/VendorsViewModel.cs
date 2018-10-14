@@ -97,7 +97,7 @@ namespace Expenses.ViewModels
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
             var controller = Application.Current.Resources["UrlVendorsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-            var response = await this.apiService.GetList<DocumentType>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
+            var response = await this.apiService.GetList<Vendor>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
             if (!response.IsSuccess)
             {
                 return false;

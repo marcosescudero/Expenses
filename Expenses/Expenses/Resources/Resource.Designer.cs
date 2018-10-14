@@ -466,6 +466,15 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No information on expense request available.
+        /// </summary>
+        public static string NoRequestMessage {
+            get {
+                return ResourceManager.GetString("NoRequestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Functionality not implemented in this demo version.
         /// </summary>
         public static string NotImplemented {
@@ -687,6 +696,15 @@ namespace Expenses.Resources {
         public static string SomethingWrong {
             get {
                 return ResourceManager.GetString("SomethingWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync.
+        /// </summary>
+        public static string Sync {
+            get {
+                return ResourceManager.GetString("Sync", resourceCulture);
             }
         }
         

@@ -333,4 +333,10 @@
   <data name="ExpenseDate" xml:space="preserve">
     <value>Expense Date</value>
   </data>
+  <data name="Sync" xml:space="preserve">
+    <value>Sync</value>
+  </data>
+  <data name="NoRequestMessage" xml:space="preserve">
+    <value>No information on expense request available</value>
+  </data>
 </root>
