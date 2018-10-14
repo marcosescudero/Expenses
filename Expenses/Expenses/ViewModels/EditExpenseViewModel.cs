@@ -19,6 +19,7 @@
         private ImageSource imageSource;
         private bool isRunning;
         private bool isEnabled;
+        private Request requestSelected;
         private Currency currencySelected;
         private DocumentType documentTypeSelected;
         private PaymentType paymentTypeSelected;
@@ -36,12 +37,14 @@
         public List<PaymentType> MyPaymentTypes { get; set; }
         public List<ExpenseType> MyExpenseTypes { get; set; }
         public List<Vendor> MyVendors { get; set; }
+        public List<Request> MyRequests { get; set; }
 
         public ObservableCollection<Currency> Currencies { get; set; }
         public ObservableCollection<DocumentType> DocumentTypes { get; set; }
         public ObservableCollection<PaymentType> PaymentTypes { get; set; }
         public ObservableCollection<ExpenseType> ExpenseTypes { get; set; }
         public ObservableCollection<Vendor> Vendors { get; set; }
+        public ObservableCollection<Request> Requests { get; set; }
 
         public Expense Expense
         {
@@ -87,6 +90,11 @@
         {
             get { return this.vendorSelected; }
             set { SetValue(ref this.vendorSelected, value); }
+        }
+        public Request RequestSelected
+        {
+            get { return this.requestSelected; }
+            set { SetValue(ref this.requestSelected, value); }
         }
         #endregion
 
@@ -155,6 +163,23 @@
                 }).ToList();
             this.Vendors = new ObservableCollection<Vendor>(this.MyVendors);
             this.VendorSelected = expense.Vendor;
+
+            //Request
+            this.MyRequests = MainViewModel.GetInstance().
+                Requests.MyRequests.Select(p => new Request
+                {
+                    RequestId = p.RequestId,
+                    Approved = p.Approved,
+                    Comments = p.Comments,
+                    Description = p.Description,
+                    ExpenseDateEnd = p.ExpenseDateEnd,
+                    ExpenseDateStart = p.ExpenseDateStart,
+                    Expenses = p.Expenses,
+                    UserId = p.UserId,
+                }).ToList();
+            this.Requests = new ObservableCollection<Request>(this.MyRequests);
+            this.RequestSelected = expense.Request;
+
         }
         #endregion
 
