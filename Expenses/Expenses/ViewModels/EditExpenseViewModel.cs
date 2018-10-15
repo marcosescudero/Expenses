@@ -6,16 +6,16 @@
     using System.Windows.Input;
     using Common.Models;
     using GalaSoft.MvvmLight.Command;
-    //using Plugin.Media;
-    //using Plugin.Media.Abstractions;
     using Helpers;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
     using Services;
     using Xamarin.Forms;
     public class EditExpenseViewModel : BaseViewModel
     {
         #region Attributes
         private Expense expense;
-        //private MediaFile file;
+        private MediaFile file;
         private ImageSource imageSource;
         private bool isRunning;
         private bool isEnabled;
@@ -104,7 +104,8 @@
             this.Expense = expense;
             this.isEnabled = true;
             this.apiService = new ApiService();
-            this.ImageSource = expense.ImageFullPath;
+            //this.ImageSource = (expense.ImageFullPath!=null?expense.ImageFullPath:"noimage");
+            this.ImageSource = "noimage";
 
             // Currencies
             this.MyCurrencies = MainViewModel.GetInstance().
@@ -117,6 +118,7 @@
                 }).ToList();
             this.Currencies = new ObservableCollection<Currency>(this.MyCurrencies);
             this.CurrencySelected = expense.Currency;
+            this.CurrencySelected = this.MyCurrencies.Where(p => p.CurrencyId == expense.CurrencyId).FirstOrDefault();
 
             // Document Types
             this.MyDocumentTypes = MainViewModel.GetInstance().
@@ -128,7 +130,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.DocumentTypes = new ObservableCollection<DocumentType>(this.MyDocumentTypes);
-            this.DocumentTypeSelected = expense.DocumentType;
+            this.DocumentTypeSelected = this.MyDocumentTypes.Where(p => p.DocumentTypeId == expense.DocumentTypeId).FirstOrDefault();
 
             // Payment Types
             this.MyPaymentTypes = MainViewModel.GetInstance().
@@ -139,7 +141,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.PaymentTypes = new ObservableCollection<PaymentType>(this.MyPaymentTypes);
-            this.PaymentTypeSelected = expense.PaymentType;
+            this.PaymentTypeSelected = this.MyPaymentTypes.Where(p => p.PaymentTypeId == expense.PaymentTypeId).FirstOrDefault();
 
             // Expense Types
             this.MyExpenseTypes = MainViewModel.GetInstance().
@@ -149,7 +151,7 @@
                     Description = p.Description,
                 }).ToList();
             this.ExpenseTypes = new ObservableCollection<ExpenseType>(this.MyExpenseTypes);
-            this.ExpenseTypeSelected = expense.ExpenseType;
+            this.ExpenseTypeSelected = this.MyExpenseTypes.Where(p => p.ExpenseTypeId == expense.ExpenseTypeId).FirstOrDefault();
 
             // Vendors
             this.MyVendors = MainViewModel.GetInstance().
@@ -162,7 +164,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.Vendors = new ObservableCollection<Vendor>(this.MyVendors);
-            this.VendorSelected = expense.Vendor;
+            this.VendorSelected = this.MyVendors.Where(p => p.VendorId == expense.VendorId).FirstOrDefault();
 
             //Request
             this.MyRequests = MainViewModel.GetInstance().
@@ -178,8 +180,7 @@
                     UserId = p.UserId,
                 }).ToList();
             this.Requests = new ObservableCollection<Request>(this.MyRequests);
-            this.RequestSelected = expense.Request;
-
+            this.RequestSelected = this.MyRequests.Where(p => p.RequestId == expense.RequestId).FirstOrDefault();
         }
         #endregion
 
@@ -194,14 +195,62 @@
 
         private async void Save()
         {
-
-
             await Application.Current.MainPage.DisplayAlert(
                 Languages.Atention,
                 "Datos Guardados",
                 Languages.Accept);
             return;
-          }
+        }
+        public ICommand ChangeImageCommand
+        {
+            get
+            {
+                return new RelayCommand(ChangeImage);
+            }
+        }
+
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize();
+
+            var source = await Application.Current.MainPage.DisplayActionSheet(
+                Languages.ImageSource,
+                Languages.Cancel,
+                null,
+                Languages.FromGallery,
+                Languages.NewPicture);
+
+            if (source == Languages.Cancel)
+            {
+                this.file = null;
+                return;
+            }
+
+            if (source == Languages.NewPicture)
+            {
+                this.file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = "test.jpg",
+                        PhotoSize = PhotoSize.Small,
+                    }
+                );
+            }
+            else
+            {
+                this.file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (this.file != null)
+            {
+                this.ImageSource = ImageSource.FromStream(() =>
+                {
+                    var stream = this.file.GetStream();
+                    return stream;
+                });
+            }
+        }
         #endregion
 
     }

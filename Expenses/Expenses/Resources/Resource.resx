@@ -339,4 +339,7 @@
   <data name="NoRequestMessage" xml:space="preserve">
     <value>No information on expense request available</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>--Select--</value>
+  </data>
 </root>

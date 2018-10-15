@@ -338,4 +338,7 @@
   <data name="NoRequestMessage" xml:space="preserve">
     <value>Nenhuma informação sobre o pedido de despesa disponível!</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>--Selecionar--</value>
+  </data>
 </root>

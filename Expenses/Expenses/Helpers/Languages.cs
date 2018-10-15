@@ -351,7 +351,9 @@ namespace Expenses.Helpers
         {
             get { return Resource.NoRequestMessage; }
         }
-
-        
+        public static string Select
+        {
+            get { return Resource.Select; }
+        }
     }
 }
