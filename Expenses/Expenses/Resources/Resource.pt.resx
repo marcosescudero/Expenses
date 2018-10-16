@@ -341,4 +341,55 @@
   <data name="Select" xml:space="preserve">
     <value>--Selecionar--</value>
   </data>
+  <data name="DateRangeError" xml:space="preserve">
+    <value>Data fora do intervalo permitido!</value>
+  </data>
+  <data name="DocumentNumberError" xml:space="preserve">
+    <value>Você deve digitar o número do documento!</value>
+  </data>
+  <data name="AmountInvalid" xml:space="preserve">
+    <value>Valor inválido</value>
+  </data>
+  <data name="AmountIvaInvalid" xml:space="preserve">
+    <value>Montante IVA inválido</value>
+  </data>
+  <data name="AmountPercepcionInvalid" xml:space="preserve">
+    <value>Percepção de quantidade inválida!</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>Dados salvos</value>
+  </data>
+  <data name="ExpenseType" xml:space="preserve">
+    <value>Tipo de Despesa</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Fornecedor</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Tipo de Documento</value>
+  </data>
+  <data name="DocumentNumber" xml:space="preserve">
+    <value>Número do documento</value>
+  </data>
+  <data name="PaymentType" xml:space="preserve">
+    <value>Tipo de pagamento</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Moeda</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="IVA" xml:space="preserve">
+    <value>IVA</value>
+  </data>
+  <data name="Perception" xml:space="preserve">
+    <value>Percepção</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Valor total</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comentários</value>
+  </data>
 </root>

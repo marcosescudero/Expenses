@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Expenses.Backend.Models;
-using Expenses.Common.Models;
-
-namespace Expenses.Backend.Controllers
+﻿namespace Expenses.Backend.Controllers
 {
+    using System.Data.Entity;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Backend.Models;
+    using Common.Models;
+
+    [Authorize]
     public class RequestsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();

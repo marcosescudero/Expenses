@@ -355,5 +355,73 @@ namespace Expenses.Helpers
         {
             get { return Resource.Select; }
         }
+        public static string DateRangeError
+        {
+            get { return Resource.DateRangeError; }
+        }
+        public static string DocumentNumberError
+        {
+            get { return Resource.DocumentNumberError; }
+        }
+        public static string AmountInvalid
+        {
+            get { return Resource.AmountInvalid; }
+        }
+        public static string AmountIvaInvalid
+        {
+            get { return Resource.AmountIvaInvalid; }
+        }
+        public static string AmountPercepcionInvalid
+        {
+            get { return Resource.AmountPercepcionInvalid; }
+        }
+        public static string DataSaved
+        {
+            get { return Resource.DataSaved; }
+        }
+        public static string ExpenseType
+        {
+            get { return Resource.ExpenseType; }
+        }
+        public static string Vendor
+        {
+            get { return Resource.Vendor; }
+        }
+        public static string DocumentType
+        {
+            get { return Resource.DocumentType; }
+        }
+        public static string DocumentNumber
+        {
+            get { return Resource.DocumentNumber; }
+        }
+        public static string PaymentType
+        {
+            get { return Resource.PaymentType; }
+        }
+        public static string Currency
+        {
+            get { return Resource.Currency; }
+        }
+        public static string Amount
+        {
+            get { return Resource.Amount; }
+        }
+        public static string IVA
+        {
+            get { return Resource.IVA; }
+        }
+        public static string Perception
+        {
+            get { return Resource.Perception; }
+        }
+        public static string TotalAmount
+        {
+            get { return Resource.TotalAmount; }
+        }
+        public static string Comments
+        {
+            get { return Resource.Comments; }
+        }
     }
 }

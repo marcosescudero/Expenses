@@ -67,7 +67,7 @@
                 return null;
             }
         }
-        // La clase Response, como es una clase que usaremos transversalmente, no la crearemos aquí, sino que la crearemos en Sales.Common.Models
+        // La clase Response, como es una clase que usaremos transversalmente, no la crearemos aquí, sino que la crearemos en ..Common.Models
         public async Task<Response> GetList<T>(string urlBase, string prefix, string controller)
         {
             try

@@ -4,7 +4,7 @@
              xmlns:i18n="clr-namespace:Expenses.Helpers"
              x:Class="Expenses.Views.ExpensesPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="{i18n:Translate Expenses}">
+             Title="{Binding Expenses.RequestDescription}">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Expenses}"

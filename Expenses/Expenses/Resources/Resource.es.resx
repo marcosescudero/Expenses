@@ -330,7 +330,7 @@
     <value>Editar gasto</value>
   </data>
   <data name="ExpenseDate" xml:space="preserve">
-    <value>Fecha del gasto</value>
+    <value>Fecha</value>
   </data>
   <data name="Sync" xml:space="preserve">
     <value>Sincronizar</value>
@@ -340,5 +340,56 @@
   </data>
   <data name="Select" xml:space="preserve">
     <value>--Seleccione--</value>
+  </data>
+  <data name="DateRangeError" xml:space="preserve">
+    <value>Fecha fuera del rango permitido!</value>
+  </data>
+  <data name="DocumentNumberError" xml:space="preserve">
+    <value>Debe introducir el número de documento</value>
+  </data>
+  <data name="AmountInvalid" xml:space="preserve">
+    <value>Importe no Válido</value>
+  </data>
+  <data name="AmountIvaInvalid" xml:space="preserve">
+    <value>Importe IVA no Válido</value>
+  </data>
+  <data name="AmountPercepcionInvalid" xml:space="preserve">
+    <value>¡Percepción de la cantidad no válida!</value>
+  </data>
+  <data name="DataSaved" xml:space="preserve">
+    <value>Datos guardados</value>
+  </data>
+  <data name="ExpenseType" xml:space="preserve">
+    <value>Tipo de gasto</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>Proveedor</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Tipo de documento</value>
+  </data>
+  <data name="DocumentNumber" xml:space="preserve">
+    <value>Número de documento</value>
+  </data>
+  <data name="PaymentType" xml:space="preserve">
+    <value>Tipo de pago</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Moneda:</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Importe</value>
+  </data>
+  <data name="IVA" xml:space="preserve">
+    <value>IVA</value>
+  </data>
+  <data name="Perception" xml:space="preserve">
+    <value>Percepción</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Importe total</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comentarios</value>
   </data>
 </root>

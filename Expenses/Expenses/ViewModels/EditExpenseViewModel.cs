@@ -51,6 +51,7 @@
             get { return this.expense; }
             set { SetValue(ref expense, value); }
         }
+
         public bool IsRunning
         {
             get { return this.isRunning; }
@@ -104,8 +105,8 @@
             this.Expense = expense;
             this.isEnabled = true;
             this.apiService = new ApiService();
-            //this.ImageSource = (expense.ImageFullPath!=null?expense.ImageFullPath:"noimage");
-            this.ImageSource = "noimage";
+            this.ImageSource = (!string.IsNullOrEmpty(expense.ImageFullPath)?expense.ImageFullPath:"noimage");
+            //this.ImageSource = "noimage";
 
             // Currencies
             this.MyCurrencies = MainViewModel.GetInstance().
@@ -195,12 +196,133 @@
 
         private async void Save()
         {
+            if (Expense.ExpenseDate > RequestSelected.ExpenseDateEnd || 
+                Expense.ExpenseDate < RequestSelected.ExpenseDateStart)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.DateRangeError,
+                    Languages.Accept);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.Expense.DocumentNumber))
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.DocumentNumberError,
+                    Languages.Accept);
+                return;
+            }
+
+            if (Expense.Amount <= 0)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.AmountInvalid,
+                    Languages.Accept);
+                return;
+            }
+
+            if (Expense.AmountIVA > Expense.Amount)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.AmountIvaInvalid,
+                    Languages.Accept);
+                return;
+            }
+
+            if (Expense.AmountPercepcion > Expense.Amount)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.AmountPercepcionInvalid,
+                    Languages.Accept);
+                return;
+            }
+
+            if (Expense.AmountIVA + Expense.AmountPercepcion > Expense.Amount)
+            {
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    Languages.AmountPercepcionInvalid,
+                    Languages.Accept);
+                return;
+            }
+
+            Expense.TotalAmount = Expense.Amount + Expense.AmountIVA + Expense.AmountPercepcion;
+
+            this.IsRunning = true; // Esto muestra el activity indicator
+            this.IsEnabled = false; // Desabilito el botón de SAVE para que el usuario no le pegue varias veces.
+
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Accept);
+                return;
+            }
+
+
+            byte[] imageArray = null;
+            if (this.file != null)
+            {
+                imageArray = FilesHelper.ReadFully(this.file.GetStream());
+                this.expense.ImageArray = imageArray;
+            }
+
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var prefix = Application.Current.Resources["UrlPrefix"].ToString();
+            var controller = Application.Current.Resources["UrlExpensesController"].ToString();
+            var response = await this.apiService.Put(url, prefix, controller, this.expense, this.Expense.ExpenseId, Settings.TokenType, Settings.AccessToken);
+            //var response = await this.apiService.Put(url, prefix, controller, this.expense, this.Expense.ExpenseId);
+
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    response.Message,
+                    Languages.Accept);
+                return;
+            }
+
+            /*
+             *   Refrescamos la ListView eliminado y agregando el producto. 
+             *   (Es la unica manera en que refresca. Bug de xamarin)
+             */
+
+            var newExpense = (Expense)response.Result;
+            var expensesViewModel = ExpensesViewModel.GetInstance();
+            var oldExpense = expensesViewModel.MyExpenses.Where(p => p.ExpenseId == this.Expense.ExpenseId).FirstOrDefault();
+            if (oldExpense != null)
+            {
+                expensesViewModel.MyExpenses.Remove(oldExpense);
+            }
+
+            expensesViewModel.MyExpenses.Add(newExpense);
+            expensesViewModel.RefreshList();
+
+
+            this.IsRunning = false;
+            this.IsEnabled = true;
+
             await Application.Current.MainPage.DisplayAlert(
                 Languages.Atention,
-                "Datos Guardados",
+                Languages.DataSaved,
                 Languages.Accept);
-            return;
+
+            await App.Navigator.PopAsync();
+
         }
+
+
         public ICommand ChangeImageCommand
         {
             get
@@ -251,6 +373,68 @@
                 });
             }
         }
+
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                return new RelayCommand(Delete);
+            }
+        }
+        private async void Delete()
+        {
+            var answer = await Application.Current.MainPage.DisplayAlert(
+                Languages.Confirm,
+                Languages.DeleteConfirmation,
+                Languages.Yes,
+                Languages.No);
+
+            if (!answer)
+            {
+                return;
+            }
+
+            /*
+            this.IsRunning = true;
+            this.isEnabled = false;
+
+            var connection = await this.apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.isEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, Languages.Accept);
+                return;
+            }
+
+            var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
+            var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
+            var controller = Application.Current.Resources["UrlProductsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
+
+            var response = await this.apiService.Delete(url, prefix, controller, this.Product.ProductId, Settings.TokenType, Settings.AccessToken);
+
+            if (!response.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.isEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                return;
+            }
+
+            var productsViewModel = ProductsViewModel.GetInstance();
+            var deletedProduct = productsViewModel.MyProducts.Where(p => p.ProductId == this.Product.ProductId).FirstOrDefault(); // LinQ
+            if (deletedProduct != null)
+            {
+                productsViewModel.MyProducts.Remove(deletedProduct); // con esto me lo debe refrescar automaticamente en la lista
+            }
+            productsViewModel.RefreshList();
+            this.IsRunning = false;
+            this.isEnabled = true;
+            await App.Navigator.PopAsync();
+            */
+
+        }
+
         #endregion
 
     }

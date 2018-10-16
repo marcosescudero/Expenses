@@ -23,6 +23,7 @@ namespace Expenses.ViewModels
         private Request request;
         private ObservableCollection<ExpenseItemViewModel> expenses;
         private decimal totalExpenses;
+        private string requestDescription;
         #endregion
 
         #region Services
@@ -40,6 +41,8 @@ namespace Expenses.ViewModels
             get { return this.request; }
             set { SetValue(ref this.request, value); }
         }
+
+        public string RequestDescription { get; set; }
 
         public ObservableCollection<ExpenseItemViewModel> Expenses
         {
@@ -90,7 +93,7 @@ namespace Expenses.ViewModels
             this.apiService = new ApiService();
             this.dataService = new DataService();
             LoadExpenses();
-            this.IsRefreshing = false;
+            //this.IsRefreshing = false;
         }
         public ExpensesViewModel(Request request)
         {
@@ -98,8 +101,9 @@ namespace Expenses.ViewModels
             this.apiService = new ApiService();
             this.dataService = new DataService();
             this.Request = request;
+            RequestDescription = request.Description;
             LoadExpenses();
-            this.IsRefreshing = false;
+            //this.IsRefreshing = false;
         }
         #endregion
 
@@ -175,8 +179,8 @@ namespace Expenses.ViewModels
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
             var controller = Application.Current.Resources["UrlExpensesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
 
-            var response = await this.apiService.GetList<Expense>(url, prefix, controller);
-            //var response = await this.apiService.GetList<Expense>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
+            //var response = await this.apiService.GetList<Expense>(url, prefix, controller);
+            var response = await this.apiService.GetList<Expense>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 
             if (!response.IsSuccess)
             {

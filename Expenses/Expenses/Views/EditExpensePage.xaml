@@ -28,6 +28,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
+                    <!-- 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -40,8 +41,9 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>                    
+                    -->
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
@@ -58,14 +60,14 @@
                     <Label
                         Grid.Row="1"
                         Grid.Column="0"
-                        Text="Expense Type"
+                        Text="{i18n:Translate ExpenseType}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
                     <Picker 
                         Grid.Row="1"
                         Grid.Column="1"
-                        Title="{Binding Select}"
+                        Title="{i18n:Translate Select}"
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding ExpenseTypes}"
                         SelectedItem="{Binding ExpenseTypeSelected, Mode=TwoWay}">
@@ -73,14 +75,14 @@
                     <Label
                         Grid.Row="2"
                         Grid.Column="0"
-                        Text="Vendor"
+                        Text="{i18n:Translate Vendor}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
                     <Picker 
                         Grid.Row="2"
                         Grid.Column="1"
-                        Title="{Binding Select}"
+                        Title="{i18n:Translate Select}"
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding Vendors}"
                         SelectedItem="{Binding VendorSelected, Mode=TwoWay}">
@@ -88,14 +90,14 @@
                     <Label
                         Grid.Row="3"
                         Grid.Column="0"
-                        Text="Doc.Type"
+                        Text="{i18n:Translate DocumentType}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
                     <Picker 
                         Grid.Row="3"
                         Grid.Column="1"
-                        Title="{Binding Select}"
+                        Title="{i18n:Translate Select}"
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding DocumentTypes}"
                         SelectedItem="{Binding DocumentTypeSelected, Mode=TwoWay}">
@@ -103,7 +105,7 @@
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
-                        Text="Document N."
+                        Text="{i18n:Translate DocumentNumber}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -115,14 +117,14 @@
                     <Label
                         Grid.Row="5"
                         Grid.Column="0"
-                        Text="Payment Type"
+                        Text="{i18n:Translate PaymentType}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
                     <Picker 
                         Grid.Row="5"
                         Grid.Column="1"
-                        Title="{Binding Select}"
+                        Title="{i18n:Translate Select}"
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding PaymentTypes}"
                         SelectedItem="{Binding PaymentTypeSelected, Mode=TwoWay}">
@@ -130,14 +132,14 @@
                     <Label
                         Grid.Row="6"
                         Grid.Column="0"
-                        Text="Currency"
+                        Text="{i18n:Translate Currency}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
                     <Picker 
                         Grid.Row="6"
                         Grid.Column="1"
-                        Title="{Binding Select}"
+                        Title="{i18n:Translate Select}"
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding Currencies}"
                         SelectedItem="{Binding CurrencySelected, Mode=TwoWay}">
@@ -145,7 +147,7 @@
                     <Label
                         Grid.Row="7"
                         Grid.Column="0"
-                        Text="Amount"
+                        Text="{i18n:Translate Amount}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -158,7 +160,7 @@
                     <Label
                         Grid.Row="8"
                         Grid.Column="0"
-                        Text="IVA"
+                        Text="{i18n:Translate IVA}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -171,7 +173,7 @@
                     <Label
                         Grid.Row="9"
                         Grid.Column="0"
-                        Text="Percep."
+                        Text="{i18n:Translate Perception}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -184,7 +186,7 @@
                     <Label
                         Grid.Row="10"
                         Grid.Column="0"
-                        Text="Total Amount"
+                        Text="{i18n:Translate TotalAmount}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -196,10 +198,11 @@
                         FontAttributes="Bold"
                         VerticalOptions="Center">
                     </Label>
+                    <!-- 
                     <Label
                         Grid.Row="11"
                         Grid.Column="0"
-                        Text="Comments"
+                        Text="{i18n:Translate Comments}"
                         TextColor="{StaticResource FontColor}"
                         VerticalOptions="Center">
                     </Label>
@@ -207,20 +210,44 @@
                         Grid.Row="11"
                         Grid.Column="1"
                         Text="{Binding Expense.Comments}"
-                        VerticalOptions="Fill">
+                        VerticalOptions="Center">
                     </Editor>                    
+                    -->
                 </Grid>
+                <Frame BackgroundColor="{StaticResource Primary_Light}">
+                    <StackLayout
+                        Orientation="Vertical"
+                        VerticalOptions="CenterAndExpand">
+                        <Label
+                            Text="{i18n:Translate Comments}"
+                            TextColor="{StaticResource FontColor}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Editor
+                            Grid.Row="11"
+                            Grid.Column="1"
+                            Text="{Binding Expense.Comments}"
+                            VerticalOptions="FillAndExpand">
+                        </Editor>
+                    </StackLayout>
+                </Frame>
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand">
+                </ActivityIndicator>
                 <Image
                     Source="{Binding ImageSource}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChangeImageCommand}"/>
                     </Image.GestureRecognizers>
-                </Image>                
-                <ActivityIndicator
-                    IsRunning="{Binding IsRunning}"
-                    VerticalOptions="CenterAndExpand">
-                </ActivityIndicator>
+                </Image>
+                <Label
+                	FontSize="Micro"
+                	HorizontalOptions="Center"
+                	Text="{i18n:Translate ChangeImage}">
+                </Label>
                 <StackLayout
+                    Padding="0,5,0,0"
                     Margin="40,0"
                     Orientation="Horizontal"
                     VerticalOptions="CenterAndExpand">

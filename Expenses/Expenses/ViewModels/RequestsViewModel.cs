@@ -3,11 +3,13 @@
     using Common.Models;
     using Expenses.Helpers;
     using Expenses.Models;
+    using GalaSoft.MvvmLight.Command;
     using Services;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Windows.Input;
     using Xamarin.Forms;
 
     public class RequestsViewModel : BaseViewModel
@@ -122,8 +124,8 @@
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
             var controller = Application.Current.Resources["UrlRequestsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-            var response = await this.apiService.GetList<Request>(url, prefix, controller);
-            //var response = await this.apiService.GetList<Expense>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
+            //var response = await this.apiService.GetList<Request>(url, prefix, controller);
+            var response = await this.apiService.GetList<Request>(url, prefix, controller, Settings.TokenType, Settings.AccessToken);
 
             if (!response.IsSuccess)
             {
@@ -169,8 +171,16 @@
                 myListRequestItemViewModel.OrderBy(p => p.Description));
 
         }
+        #endregion
 
-
+        #region Commands
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadRequests);
+            }
+        }
         #endregion
 
     }

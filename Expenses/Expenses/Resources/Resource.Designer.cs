@@ -106,6 +106,42 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Amount.
+        /// </summary>
+        public static string AmountInvalid {
+            get {
+                return ResourceManager.GetString("AmountInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Amount IVA.
+        /// </summary>
+        public static string AmountIvaInvalid {
+            get {
+                return ResourceManager.GetString("AmountIvaInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Amount Perception.
+        /// </summary>
+        public static string AmountPercepcionInvalid {
+            get {
+                return ResourceManager.GetString("AmountPercepcionInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Atention.
         /// </summary>
         public static string Atention {
@@ -133,11 +169,47 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string Confirm {
             get {
                 return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Saved.
+        /// </summary>
+        public static string DataSaved {
+            get {
+                return ResourceManager.GetString("DataSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date outside the allowed range.
+        /// </summary>
+        public static string DateRangeError {
+            get {
+                return ResourceManager.GetString("DateRangeError", resourceCulture);
             }
         }
         
@@ -183,6 +255,33 @@ namespace Expenses.Resources {
         public static string DescriptionPlaceholder {
             get {
                 return ResourceManager.GetString("DescriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Number.
+        /// </summary>
+        public static string DocumentNumber {
+            get {
+                return ResourceManager.GetString("DocumentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter the document number.
+        /// </summary>
+        public static string DocumentNumberError {
+            get {
+                return ResourceManager.GetString("DocumentNumberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Type.
+        /// </summary>
+        public static string DocumentType {
+            get {
+                return ResourceManager.GetString("DocumentType", resourceCulture);
             }
         }
         
@@ -286,6 +385,15 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expense Type.
+        /// </summary>
+        public static string ExpenseType {
+            get {
+                return ResourceManager.GetString("ExpenseType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         public static string FirstName {
@@ -345,6 +453,15 @@ namespace Expenses.Resources {
         public static string IsAvailable {
             get {
                 return ResourceManager.GetString("IsAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IVA.
+        /// </summary>
+        public static string IVA {
+            get {
+                return ResourceManager.GetString("IVA", resourceCulture);
             }
         }
         
@@ -565,6 +682,24 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Type.
+        /// </summary>
+        public static string PaymentType {
+            get {
+                return ResourceManager.GetString("PaymentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perception.
+        /// </summary>
+        public static string Perception {
+            get {
+                return ResourceManager.GetString("Perception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone.
         /// </summary>
         public static string Phone {
@@ -718,11 +853,29 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Amount.
+        /// </summary>
+        public static string TotalAmount {
+            get {
+                return ResourceManager.GetString("TotalAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please turn on your internet settings.
         /// </summary>
         public static string TurnOnInternet {
             get {
                 return ResourceManager.GetString("TurnOnInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vendor.
+        /// </summary>
+        public static string Vendor {
+            get {
+                return ResourceManager.GetString("Vendor", resourceCulture);
             }
         }
         

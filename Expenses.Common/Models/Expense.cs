@@ -66,7 +66,7 @@
             {
                 if (string.IsNullOrEmpty(this.ImagePath))
                 {
-                    return "noproduct";
+                    return "noimage";
                 }
                 return $"http://200.55.241.235/ExpensesAPI{this.ImagePath.Substring(1)}"; // el substring es para quitarle el ñuflo
             }
