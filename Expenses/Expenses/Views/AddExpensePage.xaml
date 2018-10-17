@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        xmlns:b="clr-namespace:Expenses.Behaviors"
-        xmlns:i18n="clr-namespace:Expenses.Helpers"
-        x:Class="Expenses.Views.EditExpensePage"
-        BackgroundColor="{StaticResource Primary_Light}"
-        BindingContext="{Binding Main, Source={StaticResource Locator}}"
-        Title="{i18n:Translate EditExpense}">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Expenses.Behaviors"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:i18n="clr-namespace:Expenses.Helpers"
+             x:Class="Expenses.Views.AddExpensePage"
+             BackgroundColor="{StaticResource Primary_Light}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="{i18n:Translate AddExpense}">
     <ContentPage.Content>
         <ScrollView
-            BindingContext="{Binding EditExpense}">
+            BindingContext="{Binding AddExpense}"
+            BackgroundColor="{StaticResource Primary_Light}">
             <StackLayout
                 Padding="5">
                 <Grid
@@ -19,22 +21,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <!-- 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                    </Grid.RowDefinitions>                    
-                    -->
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
@@ -45,9 +31,7 @@
                     <DatePicker 
                         Grid.Row="0"
                         Grid.Column="1"
-                        MinimumDate="{Binding Expense.Request.ExpenseDateStart}"
-                        MaximumDate="{Binding Expense.Request.ExpenseDateEnd}"
-                        Date="{Binding Expense.ExpenseDate}">
+                        Date="{Binding ExpendDate}">
                         <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
                     </DatePicker>
                     <Label
@@ -64,7 +48,7 @@
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding ExpenseTypes}"
                         SelectedItem="{Binding ExpenseTypeSelected, Mode=TwoWay}">
-                    </Picker>                    
+                    </Picker>
                     <Label
                         Grid.Row="2"
                         Grid.Column="0"
@@ -147,7 +131,7 @@
                     <Entry
                         Grid.Row="7"
                         Grid.Column="1"
-                        Text="{Binding Expense.Amount}"
+                        Text="{Binding Amount}"
                         Keyboard="Telephone">
                     </Entry>
                     <Label
@@ -160,7 +144,7 @@
                     <Entry
                         Grid.Row="8"
                         Grid.Column="1"
-                        Text="{Binding Expense.AmountIVA}"
+                        Text="{Binding AmountIVA}"
                         Keyboard="Telephone">
                     </Entry>
                     <Label
@@ -173,7 +157,7 @@
                     <Entry
                         Grid.Row="9"
                         Grid.Column="1"
-                        Text="{Binding Expense.AmountPercepcion}"
+                        Text="{Binding AmountPercepcion}"
                         Keyboard="Telephone">
                     </Entry>
                     <Label
@@ -240,16 +224,6 @@
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Save}"
                         TextColor="{StaticResource AccentColor2}">
-                    </Button>
-                    <Button
-                        BackgroundColor="Red"
-                        BorderRadius="23"
-                        Command="{Binding DeleteCommand}"
-                        HeightRequest="46"
-                        HorizontalOptions="FillAndExpand"
-                        IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Delete}"
-                        TextColor="White">
                     </Button>
                 </StackLayout>
             </StackLayout>

@@ -79,6 +79,15 @@ namespace Expenses.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Expense.
+        /// </summary>
+        public static string AddExpense {
+            get {
+                return ResourceManager.GetString("AddExpense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Product.
         /// </summary>
         public static string AddProduct {

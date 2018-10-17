@@ -1,5 +1,6 @@
 ﻿namespace Expenses.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -11,7 +12,7 @@
     using Plugin.Media.Abstractions;
     using Services;
     using Xamarin.Forms;
-    public class EditExpenseViewModel : BaseViewModel
+    public class AddExpenseViewModel : BaseViewModel
     {
         #region Attributes
         private Expense expense;
@@ -25,6 +26,11 @@
         private PaymentType paymentTypeSelected;
         private ExpenseType expenseTypeSelected;
         private Vendor vendorSelected;
+        private DateTime expenseDate;
+        private string documentNumber;
+        private decimal amount;
+        private decimal amountIVA;
+        private decimal amountPercepcion;
         #endregion
 
         #region Services
@@ -38,7 +44,6 @@
         public List<ExpenseType> MyExpenseTypes { get; set; }
         public List<Vendor> MyVendors { get; set; }
         public List<Request> MyRequests { get; set; }
-
         public ObservableCollection<Currency> Currencies { get; set; }
         public ObservableCollection<DocumentType> DocumentTypes { get; set; }
         public ObservableCollection<PaymentType> PaymentTypes { get; set; }
@@ -46,11 +51,34 @@
         public ObservableCollection<Vendor> Vendors { get; set; }
         public ObservableCollection<Request> Requests { get; set; }
 
-        public Expense Expense
+        public DateTime ExpenseDate
         {
-            get { return this.expense; }
-            set { SetValue(ref expense, value); }
+            get { return this.expenseDate; }
+            set { SetValue(ref this.expenseDate, value); }
         }
+
+        public string DocumentNumber
+        {
+            get { return this.documentNumber; }
+            set { SetValue(ref this.documentNumber, value); }
+        }
+        public decimal Amount
+        {
+            get { return this.amount; }
+            set { SetValue(ref this.amount, value); }
+        }
+        public decimal AmountIVA
+        {
+            get { return this.amountIVA; }
+            set { SetValue(ref this.amountIVA, value); }
+        }
+        public decimal AmountPercepcion
+        {
+            get { return this.amountPercepcion; }
+            set { SetValue(ref this.amountPercepcion, value); }
+        }
+
+
 
         public bool IsRunning
         {
@@ -100,25 +128,23 @@
         #endregion
 
         #region Constructors
-        public EditExpenseViewModel(Expense expense)
+        public AddExpenseViewModel()
         {
-            this.Expense = expense;
             this.isEnabled = true;
             this.apiService = new ApiService();
-            this.ImageSource = (!string.IsNullOrEmpty(expense.ImageFullPath)?expense.ImageFullPath:"noimage");
-            //this.ImageSource = "noimage";
+            this.ImageSource = "noimage";
 
             // Currencies
             this.MyCurrencies = MainViewModel.GetInstance().
                 Currencies.MyCurrencies.Select(p => new Currency
                 {
-                    CurrencyId =p.CurrencyId,
+                    CurrencyId = p.CurrencyId,
                     Description = p.Description,
                     Symbol = p.Symbol,
                     Expenses = p.Expenses,
                 }).ToList();
             this.Currencies = new ObservableCollection<Currency>(this.MyCurrencies);
-            this.CurrencySelected = this.MyCurrencies.Where(p => p.CurrencyId == expense.CurrencyId).FirstOrDefault();
+            //this.CurrencySelected = this.MyCurrencies.Where(p => p.CurrencyId == expense.CurrencyId).FirstOrDefault();
 
             // Document Types
             this.MyDocumentTypes = MainViewModel.GetInstance().
@@ -130,7 +156,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.DocumentTypes = new ObservableCollection<DocumentType>(this.MyDocumentTypes);
-            this.DocumentTypeSelected = this.MyDocumentTypes.Where(p => p.DocumentTypeId == expense.DocumentTypeId).FirstOrDefault();
+            //this.DocumentTypeSelected = this.MyDocumentTypes.Where(p => p.DocumentTypeId == expense.DocumentTypeId).FirstOrDefault();
 
             // Payment Types
             this.MyPaymentTypes = MainViewModel.GetInstance().
@@ -141,7 +167,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.PaymentTypes = new ObservableCollection<PaymentType>(this.MyPaymentTypes);
-            this.PaymentTypeSelected = this.MyPaymentTypes.Where(p => p.PaymentTypeId == expense.PaymentTypeId).FirstOrDefault();
+            //this.PaymentTypeSelected = this.MyPaymentTypes.Where(p => p.PaymentTypeId == expense.PaymentTypeId).FirstOrDefault();
 
             // Expense Types
             this.MyExpenseTypes = MainViewModel.GetInstance().
@@ -151,7 +177,7 @@
                     Description = p.Description,
                 }).ToList();
             this.ExpenseTypes = new ObservableCollection<ExpenseType>(this.MyExpenseTypes);
-            this.ExpenseTypeSelected = this.MyExpenseTypes.Where(p => p.ExpenseTypeId == expense.ExpenseTypeId).FirstOrDefault();
+            //this.ExpenseTypeSelected = this.MyExpenseTypes.Where(p => p.ExpenseTypeId == expense.ExpenseTypeId).FirstOrDefault();
 
             // Vendors
             this.MyVendors = MainViewModel.GetInstance().
@@ -164,7 +190,7 @@
                     Expenses = p.Expenses,
                 }).ToList();
             this.Vendors = new ObservableCollection<Vendor>(this.MyVendors);
-            this.VendorSelected = this.MyVendors.Where(p => p.VendorId == expense.VendorId).FirstOrDefault();
+            //this.VendorSelected = this.MyVendors.Where(p => p.VendorId == expense.VendorId).FirstOrDefault();
 
             //Request
             this.MyRequests = MainViewModel.GetInstance().
@@ -180,7 +206,7 @@
                     UserId = p.UserId,
                 }).ToList();
             this.Requests = new ObservableCollection<Request>(this.MyRequests);
-            this.RequestSelected = this.MyRequests.Where(p => p.RequestId == expense.RequestId).FirstOrDefault();
+            //this.RequestSelected = this.MyRequests.Where(p => p.RequestId == expense.RequestId).FirstOrDefault();
         }
         #endregion
 
@@ -195,8 +221,8 @@
 
         private async void Save()
         {
-            if (Expense.ExpenseDate > RequestSelected.ExpenseDateEnd || 
-                Expense.ExpenseDate < RequestSelected.ExpenseDateStart)
+            if (this.ExpenseDate > RequestSelected.ExpenseDateEnd ||
+                this.ExpenseDate < RequestSelected.ExpenseDateStart)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -205,7 +231,7 @@
                 return;
             }
 
-            if (string.IsNullOrEmpty(this.Expense.DocumentNumber))
+            if (string.IsNullOrEmpty(this.DocumentNumber))
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -214,7 +240,7 @@
                 return;
             }
 
-            if (Expense.Amount <= 0)
+            if (this.Amount <= 0)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -223,7 +249,7 @@
                 return;
             }
 
-            if (Expense.AmountIVA > Expense.Amount)
+            if (this.AmountIVA > this.Amount)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -232,7 +258,7 @@
                 return;
             }
 
-            if (Expense.AmountPercepcion > Expense.Amount)
+            if (this.AmountPercepcion > this.Amount)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -241,7 +267,7 @@
                 return;
             }
 
-            if (Expense.AmountIVA + Expense.AmountPercepcion > Expense.Amount)
+            if (this.AmountIVA + this.AmountPercepcion > this.Amount)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -289,8 +315,7 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var prefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlExpensesController"].ToString();
-            var response = await this.apiService.Put(url, prefix, controller, this.expense, this.Expense.ExpenseId, Settings.TokenType, Settings.AccessToken);
-            //var response = await this.apiService.Put(url, prefix, controller, this.expense, this.Expense.ExpenseId);
+            var response = await this.apiService.Post(url, prefix, controller, this.expense, Settings.TokenType, Settings.AccessToken);
 
             if (!response.IsSuccess)
             {
@@ -303,25 +328,15 @@
                 return;
             }
 
-            /*
-             *   Refrescamos la ListView eliminado y agregando el producto. 
-             *   (Es la unica manera en que refresca. Bug de xamarin)
-             */
-
             var newExpense = (Expense)response.Result;
             var expensesViewModel = ExpensesViewModel.GetInstance();
-            var oldExpense = expensesViewModel.MyExpenses.Where(p => p.ExpenseId == this.Expense.ExpenseId).FirstOrDefault();
-            if (oldExpense != null)
-            {
-                expensesViewModel.MyExpenses.Remove(oldExpense);
-            }
 
             expensesViewModel.MyExpenses.Add(newExpense);
             expensesViewModel.RefreshList();
 
-
             this.IsRunning = false;
             this.IsEnabled = true;
+            await App.Navigator.PopAsync();
 
             await Application.Current.MainPage.DisplayAlert(
                 Languages.Atention,

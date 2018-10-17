@@ -4,7 +4,11 @@
              xmlns:i18n="clr-namespace:Expenses.Helpers"
              x:Class="Expenses.Views.ExpensesPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="{StaticResource Primary_Light}"
              Title="{Binding Expenses.RequestDescription}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_add_circle" Command="{Binding Expenses.AddExpenseCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Expenses}"

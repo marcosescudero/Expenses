@@ -423,5 +423,10 @@ namespace Expenses.Helpers
         {
             get { return Resource.Comments; }
         }
+        public static string AddExpense
+        {
+            get { return Resource.AddExpense; }
+        }
+
     }
 }

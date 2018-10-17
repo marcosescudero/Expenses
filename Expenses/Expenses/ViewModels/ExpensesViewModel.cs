@@ -7,6 +7,7 @@ namespace Expenses.ViewModels
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Common.Models;
+    using Views;
     using GalaSoft.MvvmLight.Command;
     using Helpers;
     using Models;
@@ -294,6 +295,22 @@ namespace Expenses.ViewModels
             {
                 return new RelayCommand(LoadExpenses);
             }
+        }
+
+
+        public ICommand AddExpenseCommand
+        {
+            get
+            {
+                return new RelayCommand(AddExpense);
+            }
+        }
+
+        private async void AddExpense()
+        {
+
+            MainViewModel.GetInstance().AddExpense = new AddExpenseViewModel();
+            await App.Navigator.PushAsync(new AddExpensePage());
         }
         #endregion
     }

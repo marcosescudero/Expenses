@@ -170,6 +170,7 @@
             this.Requests = new ObservableCollection<RequestItemViewModel>(
                 myListRequestItemViewModel.OrderBy(p => p.Description));
 
+            this.IsRefreshing = false;
         }
         #endregion
 

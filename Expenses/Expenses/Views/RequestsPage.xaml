@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:i18n="clr-namespace:Expenses.Helpers"
              x:Class="Expenses.Views.RequestsPage"
+             BackgroundColor="{StaticResource Primary_Light}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{i18n:Translate ExpensesRequests}">
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Requests}"
             Padding="5">
-            <ListView
+            <ListView 
                 HasUnevenRows="True"
                 IsRefreshing="{Binding IsRefreshing}"
                 IsPullToRefreshEnabled="True"

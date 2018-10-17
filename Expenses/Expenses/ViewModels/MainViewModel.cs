@@ -1,7 +1,10 @@
 ﻿namespace Expenses.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
     using Helpers;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
+
     public class MainViewModel
     {
         #region Attributes
@@ -21,6 +24,7 @@
         public RequestsViewModel Requests { get; set; }
         public ExpensesViewModel Expenses { get; set; }
         public EditExpenseViewModel EditExpense { get; set; }
+        public AddExpenseViewModel AddExpense { get; set; }
         #endregion
 
         #region Constructors
@@ -67,5 +71,7 @@
             });
         }
         #endregion
+
+
     }
 }
