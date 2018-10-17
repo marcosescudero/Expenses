@@ -404,7 +404,6 @@
                 return;
             }
 
-            /*
             this.IsRunning = true;
             this.isEnabled = false;
 
@@ -413,15 +412,18 @@
             {
                 this.IsRunning = false;
                 this.isEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, Languages.Accept);
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error, 
+                    connection.Message, 
+                    Languages.Accept);
                 return;
             }
 
             var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
             var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
-            var controller = Application.Current.Resources["UrlProductsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
+            var controller = Application.Current.Resources["UrlExpensesController"].ToString(); // Obtengo el controlador del diccionario de recursos.
 
-            var response = await this.apiService.Delete(url, prefix, controller, this.Product.ProductId, Settings.TokenType, Settings.AccessToken);
+            var response = await this.apiService.Delete(url, prefix, controller, this.Expense.ExpenseId, Settings.TokenType, Settings.AccessToken);
 
             if (!response.IsSuccess)
             {
@@ -431,18 +433,16 @@
                 return;
             }
 
-            var productsViewModel = ProductsViewModel.GetInstance();
-            var deletedProduct = productsViewModel.MyProducts.Where(p => p.ProductId == this.Product.ProductId).FirstOrDefault(); // LinQ
-            if (deletedProduct != null)
+            var expensesViewModel = ExpensesViewModel.GetInstance();
+            var deletedExpense = expensesViewModel.MyExpenses.Where(p => p.ExpenseId == this.Expense.ExpenseId).FirstOrDefault(); // LinQ
+            if (deletedExpense != null)
             {
-                productsViewModel.MyProducts.Remove(deletedProduct); // con esto me lo debe refrescar automaticamente en la lista
+                expensesViewModel.MyExpenses.Remove(deletedExpense); // con esto me lo debe refrescar automaticamente en la lista
             }
-            productsViewModel.RefreshList();
+            expensesViewModel.RefreshList();
             this.IsRunning = false;
             this.isEnabled = true;
             await App.Navigator.PopAsync();
-            */
-
         }
 
         #endregion

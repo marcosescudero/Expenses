@@ -15,12 +15,10 @@
     public class AddExpenseViewModel : BaseViewModel
     {
         #region Attributes
-        private Expense expense;
         private MediaFile file;
         private ImageSource imageSource;
         private bool isRunning;
         private bool isEnabled;
-        private Request requestSelected;
         private Currency currencySelected;
         private DocumentType documentTypeSelected;
         private PaymentType paymentTypeSelected;
@@ -28,6 +26,7 @@
         private Vendor vendorSelected;
         private DateTime expenseDate;
         private string documentNumber;
+        private string comments;
         private decimal amount;
         private decimal amountIVA;
         private decimal amountPercepcion;
@@ -43,13 +42,12 @@
         public List<PaymentType> MyPaymentTypes { get; set; }
         public List<ExpenseType> MyExpenseTypes { get; set; }
         public List<Vendor> MyVendors { get; set; }
-        public List<Request> MyRequests { get; set; }
         public ObservableCollection<Currency> Currencies { get; set; }
         public ObservableCollection<DocumentType> DocumentTypes { get; set; }
         public ObservableCollection<PaymentType> PaymentTypes { get; set; }
         public ObservableCollection<ExpenseType> ExpenseTypes { get; set; }
         public ObservableCollection<Vendor> Vendors { get; set; }
-        public ObservableCollection<Request> Requests { get; set; }
+        public Request Request { get; set; }
 
         public DateTime ExpenseDate
         {
@@ -61,6 +59,11 @@
         {
             get { return this.documentNumber; }
             set { SetValue(ref this.documentNumber, value); }
+        }
+        public string Comments
+        {
+            get { return this.comments; }
+            set { SetValue(ref this.comments, value); }
         }
         public decimal Amount
         {
@@ -77,8 +80,6 @@
             get { return this.amountPercepcion; }
             set { SetValue(ref this.amountPercepcion, value); }
         }
-
-
 
         public bool IsRunning
         {
@@ -120,19 +121,16 @@
             get { return this.vendorSelected; }
             set { SetValue(ref this.vendorSelected, value); }
         }
-        public Request RequestSelected
-        {
-            get { return this.requestSelected; }
-            set { SetValue(ref this.requestSelected, value); }
-        }
         #endregion
 
         #region Constructors
-        public AddExpenseViewModel()
+        public AddExpenseViewModel(Request request)
         {
             this.isEnabled = true;
             this.apiService = new ApiService();
             this.ImageSource = "noimage";
+            this.ExpenseDate = DateTime.Now;
+            this.Request = request;
 
             // Currencies
             this.MyCurrencies = MainViewModel.GetInstance().
@@ -192,21 +190,7 @@
             this.Vendors = new ObservableCollection<Vendor>(this.MyVendors);
             //this.VendorSelected = this.MyVendors.Where(p => p.VendorId == expense.VendorId).FirstOrDefault();
 
-            //Request
-            this.MyRequests = MainViewModel.GetInstance().
-                Requests.MyRequests.Select(p => new Request
-                {
-                    RequestId = p.RequestId,
-                    Approved = p.Approved,
-                    Comments = p.Comments,
-                    Description = p.Description,
-                    ExpenseDateEnd = p.ExpenseDateEnd,
-                    ExpenseDateStart = p.ExpenseDateStart,
-                    Expenses = p.Expenses,
-                    UserId = p.UserId,
-                }).ToList();
-            this.Requests = new ObservableCollection<Request>(this.MyRequests);
-            //this.RequestSelected = this.MyRequests.Where(p => p.RequestId == expense.RequestId).FirstOrDefault();
+
         }
         #endregion
 
@@ -221,8 +205,8 @@
 
         private async void Save()
         {
-            if (this.ExpenseDate > RequestSelected.ExpenseDateEnd ||
-                this.ExpenseDate < RequestSelected.ExpenseDateStart)
+            if (this.ExpenseDate > this.Request.ExpenseDateEnd ||
+                this.ExpenseDate < this.Request.ExpenseDateStart)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     Languages.Error,
@@ -291,31 +275,39 @@
                 return;
             }
 
-            this.expense.CurrencyId = this.CurrencySelected.CurrencyId;
-            this.expense.Currency = this.CurrencySelected;
-            this.expense.DocumentTypeId = this.DocumentTypeSelected.DocumentTypeId;
-            this.expense.DocumentType = this.DocumentTypeSelected;
-            this.expense.ExpenseTypeId = this.ExpenseTypeSelected.ExpenseTypeId;
-            this.expense.ExpenseType = this.ExpenseTypeSelected;
-            this.expense.PaymentTypeId = this.PaymentTypeSelected.PaymentTypeId;
-            this.expense.PaymentType = this.PaymentTypeSelected;
-            this.expense.VendorId = this.VendorSelected.VendorId;
-            this.expense.Vendor = this.VendorSelected;
-            this.expense.RequestId = this.RequestSelected.RequestId;
-            this.expense.Request = this.RequestSelected;
-            this.expense.TotalAmount = this.expense.Amount + this.expense.AmountIVA + this.expense.AmountPercepcion;
 
             byte[] imageArray = null;
             if (this.file != null)
             {
                 imageArray = FilesHelper.ReadFully(this.file.GetStream());
-                this.expense.ImageArray = imageArray;
             }
+
+            var expense = new Expense();
+            expense.ExpenseDate = this.ExpenseDate;
+            expense.CurrencyId = this.CurrencySelected.CurrencyId;
+            //expense.Currency = this.CurrencySelected;
+            expense.DocumentTypeId = this.DocumentTypeSelected.DocumentTypeId;
+            //expense.DocumentType = this.DocumentTypeSelected;
+            expense.ExpenseTypeId = this.ExpenseTypeSelected.ExpenseTypeId;
+            //expense.ExpenseType = this.ExpenseTypeSelected;
+            expense.PaymentTypeId = this.PaymentTypeSelected.PaymentTypeId;
+            //expense.PaymentType = this.PaymentTypeSelected;
+            expense.VendorId = this.VendorSelected.VendorId;
+            //expense.Vendor = this.VendorSelected;
+            expense.RequestId = this.Request.RequestId;
+            //expense.Request = this.Request;
+            expense.Amount = this.Amount;
+            expense.AmountIVA = this.AmountIVA;
+            expense.AmountPercepcion = this.AmountPercepcion;
+            expense.TotalAmount = expense.Amount + expense.AmountIVA + expense.AmountPercepcion;
+            expense.DocumentNumber = this.DocumentNumber;
+            expense.Comments = this.Comments;
+            expense.ImageArray = imageArray;
 
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var prefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlExpensesController"].ToString();
-            var response = await this.apiService.Post(url, prefix, controller, this.expense, Settings.TokenType, Settings.AccessToken);
+            var response = await this.apiService.Post(url, prefix, controller, expense, Settings.TokenType, Settings.AccessToken);
 
             if (!response.IsSuccess)
             {
@@ -331,22 +323,29 @@
             var newExpense = (Expense)response.Result;
             var expensesViewModel = ExpensesViewModel.GetInstance();
 
+            // Le agrego las clases
+            newExpense.Currency = this.CurrencySelected;
+            newExpense.DocumentType = this.DocumentTypeSelected;
+            newExpense.ExpenseType = this.ExpenseTypeSelected;
+            newExpense.PaymentType = this.PaymentTypeSelected;
+            newExpense.Vendor = this.VendorSelected;
+            newExpense.Request = this.Request;
+
             expensesViewModel.MyExpenses.Add(newExpense);
             expensesViewModel.RefreshList();
 
             this.IsRunning = false;
             this.IsEnabled = true;
-            await App.Navigator.PopAsync();
-
+            
+            /*
             await Application.Current.MainPage.DisplayAlert(
                 Languages.Atention,
                 Languages.DataSaved,
                 Languages.Accept);
+            */
 
             await App.Navigator.PopAsync();
-
         }
-
 
         public ICommand ChangeImageCommand
         {

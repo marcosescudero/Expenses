@@ -309,7 +309,7 @@ namespace Expenses.ViewModels
         private async void AddExpense()
         {
 
-            MainViewModel.GetInstance().AddExpense = new AddExpenseViewModel();
+            MainViewModel.GetInstance().AddExpense = new AddExpenseViewModel(this.Request);
             await App.Navigator.PushAsync(new AddExpensePage());
         }
         #endregion

@@ -31,7 +31,7 @@
                     <DatePicker 
                         Grid.Row="0"
                         Grid.Column="1"
-                        Date="{Binding ExpendDate}">
+                        Date="{Binding ExpenseDate}">
                         <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
                     </DatePicker>
                     <Label
@@ -89,6 +89,7 @@
                     <Entry
                         Grid.Row="4"
                         Grid.Column="1"
+                        MaxLength="20"
                         Text="{Binding Expense.DocumentNumber}">
                     </Entry>
                     <Label
@@ -131,6 +132,7 @@
                     <Entry
                         Grid.Row="7"
                         Grid.Column="1"
+                        MaxLength="10"
                         Text="{Binding Amount}"
                         Keyboard="Telephone">
                     </Entry>
@@ -144,6 +146,7 @@
                     <Entry
                         Grid.Row="8"
                         Grid.Column="1"
+                        MaxLength="10"
                         Text="{Binding AmountIVA}"
                         Keyboard="Telephone">
                     </Entry>
@@ -157,6 +160,7 @@
                     <Entry
                         Grid.Row="9"
                         Grid.Column="1"
+                        MaxLength="10"
                         Text="{Binding AmountPercepcion}"
                         Keyboard="Telephone">
                     </Entry>
@@ -189,7 +193,7 @@
                         <Editor
                             HeightRequest="150"
                             FontSize="Small"
-                            Text="{Binding Expense.Comments}"
+                            Text="{Binding Comments}"
                             VerticalOptions="Start">
                         </Editor>
                     </StackLayout>
