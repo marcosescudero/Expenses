@@ -1,5 +1,6 @@
 ﻿namespace Expenses.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -25,6 +26,7 @@
         private PaymentType paymentTypeSelected;
         private ExpenseType expenseTypeSelected;
         private Vendor vendorSelected;
+        private decimal totalAmount;
         #endregion
 
         #region Services
@@ -45,6 +47,12 @@
         public ObservableCollection<ExpenseType> ExpenseTypes { get; set; }
         public ObservableCollection<Vendor> Vendors { get; set; }
         public ObservableCollection<Request> Requests { get; set; }
+
+        public decimal TotalAmount
+        {
+            get { return this.totalAmount; }
+            set { SetValue(ref totalAmount, value); }
+        }
 
         public Expense Expense
         {
@@ -106,6 +114,7 @@
             this.isEnabled = true;
             this.apiService = new ApiService();
             this.ImageSource = (!string.IsNullOrEmpty(expense.ImageFullPath)?expense.ImageFullPath:"noimage");
+            this.TotalAmount = this.Expense.Amount + this.Expense.AmountIVA + this.Expense.AmountPercepcion;
             //this.ImageSource = "noimage";
 
             // Currencies
@@ -443,6 +452,19 @@
             this.IsRunning = false;
             this.isEnabled = true;
             await App.Navigator.PopAsync();
+        }
+
+        public ICommand UpdateTotalAmountCommand
+        {
+            get
+            {
+                return new RelayCommand(UpdateTotalAmount);
+            }
+        }
+
+        private void UpdateTotalAmount()
+        {
+            this.TotalAmount = this.Expense.Amount + this.Expense.AmountIVA + this.Expense.AmountPercepcion;
         }
 
         #endregion

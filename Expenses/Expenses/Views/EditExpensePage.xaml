@@ -64,7 +64,7 @@
                         ItemDisplayBinding="{Binding Description}"
                         ItemsSource="{Binding ExpenseTypes}"
                         SelectedItem="{Binding ExpenseTypeSelected, Mode=TwoWay}">
-                    </Picker>                    
+                    </Picker>
                     <Label
                         Grid.Row="2"
                         Grid.Column="0"
@@ -105,7 +105,7 @@
                     <Entry
                         Grid.Row="4"
                         Grid.Column="1"
-                        Text="{Binding Expense.DocumentNumber}">
+                        Text="{Binding Expense.DocumentNumber,Mode=TwoWay}">
                     </Entry>
                     <Label
                         Grid.Row="5"
@@ -147,8 +147,14 @@
                     <Entry
                         Grid.Row="7"
                         Grid.Column="1"
-                        Text="{Binding Expense.Amount}"
+                        Text="{Binding Expense.Amount,Mode=TwoWay}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>
                     </Entry>
                     <Label
                         Grid.Row="8"
@@ -160,8 +166,14 @@
                     <Entry
                         Grid.Row="8"
                         Grid.Column="1"
-                        Text="{Binding Expense.AmountIVA}"
+                        Text="{Binding Expense.AmountIVA,Mode=TwoWay}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>
                     </Entry>
                     <Label
                         Grid.Row="9"
@@ -173,25 +185,33 @@
                     <Entry
                         Grid.Row="9"
                         Grid.Column="1"
-                        Text="{Binding Expense.AmountPercepcion}"
+                        Text="{Binding Expense.AmountPercepcion,Mode=TwoWay}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>
                     </Entry>
-                    <Label
-                        Grid.Row="10"
-                        Grid.Column="0"
-                        Text="{i18n:Translate TotalAmount}"
-                        TextColor="{StaticResource FontColor}"
-                        VerticalOptions="Center">
-                    </Label>
-                    <Label
-                        Grid.Row="10"
-                        Grid.Column="1"
-                        Text="{Binding Expense.TotalAmount,StringFormat='\{0:C2}'}"
-                        TextColor="{StaticResource FontColor}"
-                        FontAttributes="Bold"
-                        VerticalOptions="Center">
-                    </Label>
                 </Grid>
+                <Frame BackgroundColor="{StaticResource Primary_Light}">
+                    <StackLayout
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                        <Label
+                            Text="{i18n:Translate TotalAmount}"
+                            TextColor="{StaticResource FontColor}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Label
+                            Text="{Binding TotalAmount,StringFormat='\{0:C2}',Mode=TwoWay}"
+                            TextColor="{StaticResource FontColor}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>
                 <Label
                     FontSize="Micro"
                     Text="{i18n:Translate Comments}"

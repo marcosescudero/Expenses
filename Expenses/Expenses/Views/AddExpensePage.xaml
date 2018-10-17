@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:b="clr-namespace:Expenses.Behaviors"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:i18n="clr-namespace:Expenses.Helpers"
              x:Class="Expenses.Views.AddExpensePage"
              BackgroundColor="{StaticResource Primary_Light}"
@@ -135,6 +134,12 @@
                         MaxLength="10"
                         Text="{Binding Amount}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>                        
                     </Entry>
                     <Label
                         Grid.Row="8"
@@ -149,6 +154,12 @@
                         MaxLength="10"
                         Text="{Binding AmountIVA}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>                        
                     </Entry>
                     <Label
                         Grid.Row="9"
@@ -163,23 +174,31 @@
                         MaxLength="10"
                         Text="{Binding AmountPercepcion}"
                         Keyboard="Telephone">
+                        <Entry.Behaviors>
+                            <b:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding UpdateTotalAmountCommand}"
+                                CommandParameter="Averiguar este parametro"/>
+                        </Entry.Behaviors>                        
                     </Entry>
-                    <Label
-                        Grid.Row="10"
-                        Grid.Column="0"
-                        Text="{i18n:Translate TotalAmount}"
-                        TextColor="{StaticResource FontColor}"
-                        VerticalOptions="Center">
-                    </Label>
-                    <Label
-                        Grid.Row="10"
-                        Grid.Column="1"
-                        Text="{Binding Expense.TotalAmount,StringFormat='\{0:C2}'}"
-                        TextColor="{StaticResource FontColor}"
-                        FontAttributes="Bold"
-                        VerticalOptions="Center">
-                    </Label>
                 </Grid>
+                <Frame BackgroundColor="{StaticResource Primary_Light}">
+                    <StackLayout
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                        <Label
+                            Text="{i18n:Translate TotalAmount}"
+                            TextColor="{StaticResource FontColor}"
+                            VerticalOptions="Center">
+                        </Label>
+                        <Label
+                            Text="{Binding TotalAmount,StringFormat='\{0:C2}',Mode=TwoWay}"
+                            TextColor="{StaticResource FontColor}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center">
+                        </Label>
+                    </StackLayout>
+                </Frame>                
                 <Label
                     FontSize="Micro"
                     Text="{i18n:Translate Comments}"

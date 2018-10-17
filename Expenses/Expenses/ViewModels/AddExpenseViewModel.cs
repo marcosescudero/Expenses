@@ -30,6 +30,7 @@
         private decimal amount;
         private decimal amountIVA;
         private decimal amountPercepcion;
+        private decimal totalAmount;
         #endregion
 
         #region Services
@@ -79,6 +80,11 @@
         {
             get { return this.amountPercepcion; }
             set { SetValue(ref this.amountPercepcion, value); }
+        }
+        public decimal TotalAmount
+        {
+            get { return this.totalAmount; }
+            set { SetValue(ref totalAmount, value); }
         }
 
         public bool IsRunning
@@ -398,67 +404,18 @@
             }
         }
 
-        public ICommand DeleteCommand
+        public ICommand UpdateTotalAmountCommand
         {
             get
             {
-                return new RelayCommand(Delete);
+                return new RelayCommand(UpdateTotalAmount);
             }
         }
-        private async void Delete()
+
+        private void UpdateTotalAmount()
         {
-            var answer = await Application.Current.MainPage.DisplayAlert(
-                Languages.Confirm,
-                Languages.DeleteConfirmation,
-                Languages.Yes,
-                Languages.No);
-
-            if (!answer)
-            {
-                return;
-            }
-
-            /*
-            this.IsRunning = true;
-            this.isEnabled = false;
-
-            var connection = await this.apiService.CheckConnection();
-            if (!connection.IsSuccess)
-            {
-                this.IsRunning = false;
-                this.isEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, Languages.Accept);
-                return;
-            }
-
-            var url = Application.Current.Resources["UrlAPI"].ToString(); // Obtengo la url del diccionario de recursos.
-            var prefix = Application.Current.Resources["UrlPrefix"].ToString(); // Obtengo el prefijo del diccionario de recursos.
-            var controller = Application.Current.Resources["UrlProductsController"].ToString(); // Obtengo el controlador del diccionario de recursos.
-
-            var response = await this.apiService.Delete(url, prefix, controller, this.Product.ProductId, Settings.TokenType, Settings.AccessToken);
-
-            if (!response.IsSuccess)
-            {
-                this.IsRunning = false;
-                this.isEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                return;
-            }
-
-            var productsViewModel = ProductsViewModel.GetInstance();
-            var deletedProduct = productsViewModel.MyProducts.Where(p => p.ProductId == this.Product.ProductId).FirstOrDefault(); // LinQ
-            if (deletedProduct != null)
-            {
-                productsViewModel.MyProducts.Remove(deletedProduct); // con esto me lo debe refrescar automaticamente en la lista
-            }
-            productsViewModel.RefreshList();
-            this.IsRunning = false;
-            this.isEnabled = true;
-            await App.Navigator.PopAsync();
-            */
-
+            this.TotalAmount = this.Amount + this.AmountIVA + this.AmountPercepcion;
         }
-
         #endregion
 
     }
